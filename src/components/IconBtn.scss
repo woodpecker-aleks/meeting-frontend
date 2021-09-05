@@ -1,6 +1,9 @@
 @import '@scss/utils';
 
 .icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   position: relative;
   border-radius: 50%;
@@ -9,6 +12,11 @@
   color: inherit;
   padding: spacing(1);
   @include size(40px);
+
+  &.sm {
+    padding: 0;
+    @include size(32px);
+  }
 
   &__backdrop {
     background-color: currentColor;

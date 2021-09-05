@@ -1,0 +1,23 @@
+@import '@scss/utils';
+
+.login-page {
+  &__title {
+    font-size: 48px;
+    font-weight: weight('bold');
+  }
+
+  &__container {
+    text-align: center;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    & > *:not(:last-child) {
+      margin-bottom: spacing(2);
+    }
+  }
+
+  &__submit {
+    margin: spacing(1) auto 0;
+  }
+}

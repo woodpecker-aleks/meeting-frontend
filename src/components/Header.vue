@@ -4,7 +4,7 @@
       <IconBtn @click="toggleNav">
         <Icon name="menu" />
       </IconBtn>
-      <span>
+      <span v-if="withDate">
         {{ trans(`month.${targetDate.getMonth()}`) }}
         {{ targetDate.getFullYear() }}
       </span>
@@ -25,6 +25,12 @@ export default {
   components: {
     Icon,
     IconBtn,
+  },
+  props: {
+    withDate: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {

@@ -1,0 +1,79 @@
+@import '@scss/utils';
+
+.input {
+  position: relative;
+  border-radius: radius(1);
+  padding: 0 spacing(2);
+  height: 40px;
+
+  &__control, &__backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &__backdrop {
+    background-color: currentColor;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: left 200ms timing('bounce'), right 200ms timing('bounce'), opacity 200ms ease-in-out;
+  }
+
+  &__control {
+    background-color: transparent;
+    border: 0;
+    width: 100%;
+    font-size: inherit;
+    padding: 0 spacing(2);
+    outline: none;
+    color: currentColor;
+    font-weight: weight('bold');
+    letter-spacing: inherit;
+  }
+
+  &__divider {
+    position: absolute;
+    left: spacing(2);
+    right: spacing(2);
+    bottom: spacing(0.5);
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &:active &__backdrop {
+    left: spacing(1);
+    right: spacing(1);
+  }
+
+  &:hover &__backdrop {
+    opacity: 0.2;
+  }
+
+  &:hover &__divider {
+    opacity: 0;
+  }
+
+  &__control::placeholder {
+    color: currentColor;
+    opacity: 0.8;
+  }
+
+  &__icon {
+    position: absolute;
+    right: spacing(2);
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    z-index: 1;
+  }
+
+  &.password &__control {
+    letter-spacing: 2px;
+    
+    &::placeholder {
+      letter-spacing: 0.1px;
+    }
+  }
+}

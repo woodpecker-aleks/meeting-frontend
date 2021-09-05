@@ -1,0 +1,41 @@
+@import '@scss/utils';
+
+.btn {
+  position: relative;
+  min-height: 40px;
+  min-width: 100px;
+  border-radius: 20px;
+  border: 0;
+  font-size: inherit;
+  font-weight: weight('bold');
+  background-color: transparent;
+  color: currentColor;
+  cursor: pointer;
+  padding: 0 spacing(2);
+  color: color('secondary');
+
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    background-color: color('primary');
+    transition: left 200ms timing('bounce'), right 200ms timing('bounce'), background-color 200ms ease-in-out;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover &__backdrop {
+    background-color: darken($color: color('primary'), $amount: 5);
+  }
+
+  &:active &__backdrop {
+    left: spacing(1);
+    right: spacing(1);
+  }
+}

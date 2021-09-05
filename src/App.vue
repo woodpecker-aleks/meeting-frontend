@@ -1,29 +1,14 @@
 <template>
   <div :class="['app', appTheme + '-theme']">
-    <Sprite />
-    <Header />
-    <Navigation />
-    <div class="container">
-      <Calendar />
-    </div>
+    <RouterView />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import Calendar from '@components/Calendar.vue'
-import Header from '@components/Header.vue'
-import Navigation from '@components/Navigation.vue'
-import Sprite from '@components/Sprite.vue'
 
 export default {
   name: 'App',
-  components: {
-    Calendar,
-    Header,
-    Sprite,
-    Navigation,
-  },
   computed: {
     ...mapState([
       'appTheme',

@@ -13,7 +13,7 @@
           >
             <div class="nav__item-backdrop" />
             <Icon
-              classes="nav__item-icon"
+              class="nav__item-icon"
               :name="item.icon"
             />
             <span class="nav__item-title">
@@ -26,7 +26,7 @@
             <Icon
               v-if="item.secondIcon"
               :name="item.secondIcon"
-              :classes="item.secondIconClasses + ' sm'"
+              :class="item.secondIconClasses + ' sm'"
             />
           </div>
           <Dropdown
@@ -48,7 +48,7 @@
                 </div>
               </li>
             </ul>
-            <Divider length="75" />
+            <Divider class="nav__divider" length="75" />
           </Dropdown>
         </li>
       </ul>

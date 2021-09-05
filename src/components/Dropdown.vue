@@ -1,7 +1,7 @@
 <template>
   <div
     ref="dropdown"
-    :class="['dropdown', classes, isOpen && 'active']"
+    :class="['dropdown', isOpen && 'active']"
     :style="{ maxHeight }"
   >
     <slot />
@@ -12,7 +12,6 @@
 export default {
   name: 'Dropdown',
   props: {
-    classes: String,
     isOpen: Boolean,
   },
   computed: {
