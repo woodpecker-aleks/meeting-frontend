@@ -1,0 +1,11 @@
+@import '@scss/utils';
+
+.dropdown {
+  overflow-y: hidden;
+  opacity: 0;
+  transition: max-height 300ms timing('bounce'), opacity 300ms ease-in-out;
+
+  &.active {
+    opacity: 1;
+  }
+}

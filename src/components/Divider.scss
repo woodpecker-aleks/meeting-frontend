@@ -1,0 +1,20 @@
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__line {
+    background-color: currentColor;
+    height: 1px;
+    width: 100%;  
+
+    &.lenght-75 {
+      width: 75%;
+    }
+
+    &.vertical {
+      height: 100%;
+      width: 1px;
+    }
+  }
+}

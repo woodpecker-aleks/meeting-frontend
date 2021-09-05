@@ -1,0 +1,35 @@
+@mixin size($size) {
+  width: $size;
+  height: $size;
+  min-width: $size;
+}
+
+@mixin from-breakpoint($breakpoint) {
+  @media (min-width: breakpoint($breakpoint)) {
+    @content;
+  }
+}
+
+@mixin align($side) {
+  @if $side == 'left' {
+    margin-right: auto;
+  } @else if $side == 'right' {
+    margin-left: auto;
+  } @else if $side == 'top' {
+    margin-bottom: auto;
+  } @else if $side == 'bottom' {
+    margin-top: auto;
+  } @else if $side == 'x' {
+    margin {
+      left: auto;
+      right: auto;
+    }
+  } @else if $side == 'y' {
+    margin {
+      top: auto;
+      bottom: auto;
+    }
+  } @else if $side == 'center' {
+    margin: auto;
+  }
+}

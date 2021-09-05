@@ -1,0 +1,67 @@
+@import '@scss/utils';
+
+.calendar {
+  &__item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    padding: spacing(1);
+    border-radius: radius(1);
+    width: calc(14.28% - #{spacing(1)});
+    min-height: 50px;
+    margin: spacing(0.5);
+    color: color('text');
+
+    &-backdrop {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: color('third');
+      border-radius: inherit;
+      pointer-events: none;
+      transition: transform 200ms ease-in-out;
+    }
+
+    &-num {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:not(.active):hover &-backdrop {
+      transform: scale(1.03);
+    }
+
+    &.prev, &.next {
+      opacity: 0.5;
+    }
+
+    &.focus {
+      background-color: rgb(208,187,247);
+      box-shadow: 0 -50px 50px -50px color('third') inset;
+      animation: fade 3s linear infinite;
+    }
+
+    &.active &-num {
+      position: absolute;
+      top: spacing(-0.5);
+      font-weight: weight('bold');
+      left: spacing(-0.5);
+      color: color('secondary');
+      background-color: color('primary');
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include size(40px);
+    }
+  }
+}
+
+@keyframes fade {
+  50% {
+    background-color: color('third');
+    box-shadow: 0 -50px 50px -50px rgb(208,187,247) inset;
+  }
+}

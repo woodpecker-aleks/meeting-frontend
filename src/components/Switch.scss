@@ -1,0 +1,36 @@
+@import '@scss/utils';
+
+$switch-height: 24px;
+
+.switch {
+  color: color('text');
+  cursor: pointer;
+  height: $switch-height;
+  border-radius: $switch-height / 2;
+  width: $switch-height * 1.8;
+  border: 2px solid currentColor;
+  background-color: transparent;
+  position: relative;
+
+  &__thumb {
+    position: absolute;
+    @include size($switch-height / 1.5);
+    border-radius: inherit;
+    border: 3px solid currentColor;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: 3px;
+    right: auto;
+    transition: left 200ms timing('bounce'), background-color 200ms ease-in-out;
+  }
+
+  &.active &__thumb {
+    left: calc(100% - 3px - #{$switch-height / 1.5});
+    background-color: currentColor;
+  }
+}
+
+.dark-theme .switch {
+  color: color('secondary');
+}

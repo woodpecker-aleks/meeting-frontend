@@ -1,0 +1,20 @@
+@import '@scss/utils';
+
+.icon {
+  @include size(24px);
+  transition: transform 200ms timing('bounce');
+
+  &.sm {
+    @include size(20px);
+  }
+
+  &.left {
+    transform: rotate(180deg);
+  }
+  &.top {
+    transform: rotate(-90deg);
+  }
+  &.bottom {
+    transform: rotate(90deg);
+  }
+}

@@ -1,0 +1,44 @@
+$colors: (
+  'primary': #6a1b9a,
+  'secondary': #f0f0f0,
+  'third': #ffffff,
+  'text': #424242,
+  'dark': #242424,
+);
+
+$fonts: (
+  'primary': ('Roboto', sans-serif),
+);
+
+$weights: (
+  'regular': 400,
+  'bold': 700,
+);
+
+$breakpoints: (
+  'xs': 0px,
+  'sm': 600px,
+  'md': 960px,
+  'lg': 1280px,
+  'xl': 1440px,
+  'xxl': 1920px,
+);
+
+$deeps: (
+  'default': 0,
+  'low': 10,
+  'medium': 20,
+  'high': 30,
+);
+
+$box-shadows: (
+  'primary': 0px 15px 19px 8px rgba(73, 0, 118, 0.2),
+  'hard': 0px 4px 15px 1px rgba(68, 68, 68, 0.2),
+);
+
+$timing-functions: (
+  'bounce': cubic-bezier(.35,0,.2,1.38),
+);
+
+$spacing: 8px;
+$border-radius: 8px;

@@ -1,0 +1,22 @@
+@import '@scss/reset';
+@import '@scss/utils';
+@import '@scss/base';
+
+.app {
+  font-family: font('primary');
+  font-weight: weight('regular');
+  background-color: color('secondary');
+  color: color('text');
+  min-height: 120vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px + spacing(2);
+  transition-property: color, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+
+  &.dark-theme {
+    background-color: color('text');
+    color: color('secondary');
+  }
+}

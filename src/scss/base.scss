@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 spacing(3);
+
+  @include from-breakpoint('md') {
+    max-width: 1200px;
+  }
+}

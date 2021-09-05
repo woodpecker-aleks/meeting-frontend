@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div :class="['app', appTheme + '-theme']">
+    <Sprite />
+    <Header />
+    <Navigation />
+    <div class="container">
+      <Calendar />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState } from 'vuex'
+import Calendar from "./components/Calendar.vue"
+import Header from "./components/Header.vue"
+import Navigation from './components/Navigation.vue'
+import Sprite from "./components/Sprite.vue"
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
+    Calendar,
+    Header,
+    Sprite,
+    Navigation,
+  },
+  computed: {
+    ...mapState([
+      'appTheme',
+    ]),
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="@/App.scss" lang="scss"></style>

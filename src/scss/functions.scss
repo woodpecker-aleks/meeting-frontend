@@ -1,0 +1,37 @@
+@use 'sass:map';
+
+@function spacing($pow) {
+  @return $pow * $spacing;
+}
+
+@function radius($pow) {
+  @return $pow * $border-radius;
+}
+
+@function font($name) {
+  @return map-get($map: $fonts, $key: $name);
+}
+
+@function breakpoint($name) {
+  @return map-get($map: $breakpoints, $key: $name);
+}
+
+@function weight($name) {
+  @return map-get($map: $weights, $key: $name);
+}
+
+@function color($name) {
+  @return map-get($map: $colors, $key: $name);
+}
+
+@function deep($name) {
+  @return map-get($map: $deeps, $key: $name);
+}
+
+@function shadow($name) {
+  @return map-get($map: $box-shadows, $key: $name);
+}
+
+@function timing($name) {
+  @return map-get($map: $timing-functions, $key: $name);
+}
