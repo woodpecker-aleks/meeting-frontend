@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 import Icon from '@components/Icon'
 import Switch from '@components/Switch.vue'
 import Dropdown from '@components/Dropdown.vue'
@@ -116,11 +116,11 @@ export default {
           droplist: [
             {
               title: 'lang.ru',
-              action: () => this.changeLang('ru'),
+              action: () => this.updateLang('ru'),
             },
             {
               title: 'lang.en',
-              action: () => this.changeLang('en'),
+              action: () => this.updateLang('en'),
             },
           ],
         },
@@ -139,7 +139,9 @@ export default {
     ...mapMutations([
       'toggleTheme',
       'toggleNotifications',
-      'changeLang',
+    ]),
+    ...mapActions([
+      'updateLang',
     ]),
     toggleExpandLags() {
       this.langIsOpen = !this.langIsOpen

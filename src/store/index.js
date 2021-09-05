@@ -1,12 +1,8 @@
 import { createStore } from 'vuex'
 import calendar from './calendar'
-import en from '../langs/en.json'
-import ru from '../langs/ru.json'
+import getLang from '@api/lang'
 
-const langs = {
-  en,
-  ru,
-}
+const langs = {}
 
 const store = createStore({
   strict: process.env.NODE_ENV !== 'production',
@@ -14,7 +10,7 @@ const store = createStore({
     navIsOpen: false,
     appTheme: window.localStorage.getItem('app-theme') ?? 'light',
     notifications: false,
-    appLang: window.localStorage.getItem('app-lang') ?? 'en',
+    appLang: null,
   },
   mutations: {
     toggleNotifications(state) {
@@ -33,9 +29,20 @@ const store = createStore({
       state.appLang = newLang
     },
   },
+  actions: {
+    async updateLang({ commit }, newLang) {
+      if (!langs[newLang]) {
+        const { data: targetLang } = await getLang(newLang)
+
+        langs[newLang] = targetLang
+      }
+
+      commit('changeLang', newLang)
+    },
+  },
   getters: {
     trans: state => key => {
-      return langs[state.appLang][key] ?? key
+      return langs?.[state.appLang]?.[key] ?? ''
     },
   },
   modules: {

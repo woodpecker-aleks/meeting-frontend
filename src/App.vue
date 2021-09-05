@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Calendar from "./components/Calendar.vue"
-import Header from "./components/Header.vue"
-import Navigation from './components/Navigation.vue'
-import Sprite from "./components/Sprite.vue"
+import { mapActions, mapState } from 'vuex'
+import Calendar from '@components/Calendar.vue'
+import Header from '@components/Header.vue'
+import Navigation from '@components/Navigation.vue'
+import Sprite from '@components/Sprite.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Calendar,
     Header,
@@ -27,6 +27,14 @@ export default {
   computed: {
     ...mapState([
       'appTheme',
+    ]),
+  },
+  async beforeMount() {
+    await this.updateLang(window.localStorage.getItem('app-lang') ?? 'en')
+  },
+  methods: {
+    ...mapActions([
+      'updateLang',
     ]),
   },
 }
