@@ -12,6 +12,7 @@
   color: inherit;
   padding: spacing(1);
   @include size(40px);
+  @include disableTapHighlight;
 
   &.sm {
     padding: 0;

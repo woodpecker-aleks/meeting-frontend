@@ -1,6 +1,12 @@
+@import '@scss/utils';
+
 * {
   box-sizing: border-box;
   user-select: none;
+}
+
+a, button, li, input {
+  @include disableTapHighlight;
 }
 
 .container {

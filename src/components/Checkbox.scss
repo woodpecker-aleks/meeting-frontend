@@ -6,6 +6,7 @@
   border-radius: radius(1);
   padding: 0 spacing(2);
   cursor: pointer;
+  @include disableTapHighlight;
 
   &__control {
     display: none;
