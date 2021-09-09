@@ -1,6 +1,9 @@
 <template>
   <div :class="['app', appTheme + '-theme']">
     <RouterView />
+    <router-link to="/register">Register</router-link>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/">Home</router-link>
   </div>
 </template>
 
