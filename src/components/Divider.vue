@@ -1,6 +1,6 @@
 <template>
   <div class="divider">
-    <div :class="['divider__line', classes, 'lenght-' + length]" />
+    <div :class="['divider__line', 'lenght-' + length]" />
   </div>
 </template>
 
@@ -8,7 +8,6 @@
 export default {
   name: 'Divider',
   props: {
-    classes: String,
     length: {
       type: String,
       default: '100',

@@ -1,12 +1,12 @@
 <template>
   <div class="calendar">
     <IconBtn
-      classes="calendar__arrow prev"
+      class="calendar__arrow prev"
       @click="prevMonth"
     >
       <Icon
         name="arrow"
-        classes="left"
+        class="left"
       />
     </IconBtn>
     <ul
@@ -30,7 +30,7 @@
       class="calendar__canvas"
     />
     <IconBtn
-      classes="calendar__arrow next"
+      class="calendar__arrow next"
       @click="nextMonth"
     >
       <Icon name="arrow" />

@@ -1,10 +1,20 @@
 {
-  "extends": "plugin:vue/vue3-recommended",
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "plugin:vue/vue3-essential"
+  ],
   "rules": {
     "quotes": ["warn", "single"],
     "no-trailing-spaces": "warn",
     "comma-dangle": ["warn", "always-multiline"],
     "no-console": "warn",
-    "semi": ["warn", "never"]
+    "semi": ["warn", "never"],
+    "vue/no-mutating-props": "off"
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
   }
 }

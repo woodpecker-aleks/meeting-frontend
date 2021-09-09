@@ -1,5 +1,5 @@
 <template>
-  <button :class="['switch', checked && 'active', classes]">
+  <button :class="['switch', checked && 'active']">
     <div class="switch__thumb" />
   </button>
 </template>
@@ -8,7 +8,6 @@
 export default {
   name: 'Switch',
   props: {
-    classes: String,
     checked: Boolean,
   },
 }

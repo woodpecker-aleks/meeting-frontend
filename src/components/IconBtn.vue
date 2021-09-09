@@ -1,5 +1,5 @@
 <template>
-  <button :class="['icon-btn', classes]">
+  <button class="icon-btn">
     <div class="icon-btn__backdrop" />
     <slot />
   </button>
@@ -8,9 +8,6 @@
 <script>
 export default {
   name: 'IconBtn',
-  props: {
-    classes: String,
-  },
 }
 </script>
 

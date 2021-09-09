@@ -41,8 +41,16 @@ const store = createStore({
     },
   },
   getters: {
-    trans: state => key => {
-      return langs?.[state.appLang]?.[key] ?? ''
+    trans: state => (key, props = {}) => {
+      let translatedKey = langs[state.appLang]?.[key]
+
+      if (translatedKey) {
+        for (const prop of Object.keys(props)) {
+          translatedKey = translatedKey.replace(`{{${prop}}}`, props[prop])
+        }
+      }
+
+      return translatedKey ?? key
     },
   },
   modules: {
