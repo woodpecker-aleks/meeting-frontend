@@ -4,6 +4,7 @@ $colors: (
   'third': #ffffff,
   'text': #424242,
   'dark': #242424,
+  'danger': #b71c1c,
 );
 
 $fonts: (
@@ -39,6 +40,8 @@ $box-shadows: (
 $timing-functions: (
   'bounce': cubic-bezier(.35,0,.2,1.38),
 );
+
+$backdrop-opacity: 0.2;
 
 $spacing: 8px;
 $border-radius: 8px;

@@ -1,0 +1,69 @@
+@import '@scss/utils';
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  border-radius: radius(1);
+  padding: 0 spacing(2);
+  cursor: pointer;
+
+  &__control {
+    display: none;
+  }
+
+  &__fake {
+    position: relative;
+    @include size(26px);
+    border-radius: inherit;
+    border: 2px solid color('primary');
+    transition: background-color 200ms ease-in-out;
+  }
+
+  &__fake-icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -1px;
+    opacity: 0.5;
+    opacity: background-color 200ms ease-in-out, color 200ms ease-in-out;
+  }
+
+  &__backdrop {
+    position: absolute;
+    top: spacing(-1);
+    right: spacing(-1);
+    bottom: spacing(-1);
+    left: spacing(-1);
+    opacity: 0;
+    border-radius: 50%;
+    background-color: currentColor;
+    transition: left 200ms timing('bounce'), right 200ms timing('bounce'), top 200ms timing('bounce'), bottom 200ms timing('bounce'), opacity 200ms ease-in-out, border-radius 200ms linear;
+  }
+
+  &__label {
+    margin-left: spacing(1.5);
+  }
+
+  &:hover &__backdrop {
+    opacity: $backdrop-opacity;
+  }
+
+  &.checked &__fake {
+    background-color: color('primary');
+    opacity: 1;
+  }
+
+  &.checked &__fake-icon {
+    color: color('secondary');
+    opacity: 1;
+  }
+
+  &:active &__backdrop {
+    border-radius: inherit;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+  }
+}

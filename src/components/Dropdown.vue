@@ -2,9 +2,13 @@
   <div
     ref="dropdown"
     :class="['dropdown', isOpen && 'active']"
-    :style="{ maxHeight }"
   >
-    <slot />
+    <div
+      ref="dropdownContainer"
+      class="dropdown__container"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -14,10 +18,11 @@ export default {
   props: {
     isOpen: Boolean,
   },
-  computed: {
-    maxHeight() {
-      return this.isOpen ? this.$refs?.dropdown?.scrollHeight + 'px' : '0px'
-    },
+  updated() {
+    const { dropdown, dropdownContainer } = this.$refs
+
+    dropdown.style.maxHeight = this.isOpen ? dropdownContainer.scrollHeight + 'px' : '0px'
+    dropdown.style.minHeight = this.isOpen ? dropdownContainer.scrollHeight + 'px' : '0px'
   },
 }
 </script>

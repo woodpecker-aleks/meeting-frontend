@@ -3,7 +3,9 @@
 .dropdown {
   overflow-y: hidden;
   opacity: 0;
-  transition: max-height 300ms timing('bounce'), opacity 300ms ease-in-out;
+  max-height: 0;
+  min-height: 0;
+  transition: max-height 300ms timing('bounce'), opacity 300ms ease-in-out, min-height 300ms timing('bounce');
 
   &.active {
     opacity: 1;

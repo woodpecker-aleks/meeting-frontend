@@ -8,7 +8,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba($color: color('third'), $alpha: 0.7);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(10px);
   width: 100%;
   z-index: deep('high');
   transform: translate3d(-100%, 0, 0);
@@ -68,7 +68,7 @@
   }
 
   &__item-header:hover &__item-backdrop {
-    opacity: 0.2;
+    opacity: $backdrop-opacity;
   }
 
   &__item-header:active &__item-backdrop {

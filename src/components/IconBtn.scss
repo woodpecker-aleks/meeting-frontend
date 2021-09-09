@@ -32,7 +32,7 @@
   }
 
   &:hover &__backdrop {
-    opacity: 0.2;
+    opacity: $backdrop-opacity;
   }
 
   &:active &__backdrop {

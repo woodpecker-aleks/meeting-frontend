@@ -11,7 +11,8 @@
     "no-trailing-spaces": "warn",
     "comma-dangle": ["warn", "always-multiline"],
     "no-console": "warn",
-    "semi": ["warn", "never"]
+    "semi": ["warn", "never"],
+    "vue/no-mutating-props": "off"
   },
   "parserOptions": {
     "parser": "babel-eslint"
