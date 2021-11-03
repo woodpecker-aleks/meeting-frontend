@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
-import calendar from './calendar'
-import getLang from '@api/lang'
+import LangApi from '@api/lang'
 
 const langs = {}
 
@@ -32,9 +31,10 @@ const store = createStore({
   actions: {
     async updateLang({ commit }, newLang) {
       if (!langs[newLang]) {
-        const { data: targetLang } = await getLang(newLang)
+        const { data: targetLang } = await LangApi.get(newLang)
 
         langs[newLang] = targetLang
+
       }
 
       commit('changeLang', newLang)
@@ -52,9 +52,6 @@ const store = createStore({
 
       return translatedKey ?? key
     },
-  },
-  modules: {
-    calendar,
   },
 })
 

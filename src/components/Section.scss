@@ -1,0 +1,11 @@
+@import '@scss/utils';
+
+.section {
+	display: flex;
+	flex-direction: column;
+  padding: 0 spacing(1);
+
+	&>*:not(:last-child) {
+		margin-bottom: spacing(2);
+	}
+}

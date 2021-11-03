@@ -1,47 +1,48 @@
-@import '@scss/utils';
+@import "@scss/utils";
 
 .btn {
-  position: relative;
-  min-height: 40px;
-  min-width: 100px;
-  border-radius: 20px;
-  border: 0;
-  font-size: inherit;
-  font-weight: weight('bold');
-  background-color: transparent;
+	@extend %interactive;
+	display: flex;
+	align-items: center;
+  justify-content: center;
+	position: relative;
+	min-height: 36px;
+	letter-spacing: inherit;
+	border-radius: radius(1);
+	border: 0;
   color: currentColor;
-  cursor: pointer;
-  padding: 0 spacing(2);
-  color: color('secondary');
-  @include disableTapHighlight;
+	font-size: inherit;
+	background-color: transparent;
+	padding: 0 spacing(2);
+  max-width: 200px;
+	outline: none;
 
-  &__backdrop {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: inherit;
-    background-color: color('primary');
-    transition: left 200ms timing('bounce'), right 200ms timing('bounce'), background-color 200ms ease-in-out;
+  & > * {
+    color: useColor('contrast');
   }
 
-  &__text {
-    position: relative;
-    z-index: 1;
+  &.filled {
+    background-color: useColor('main');
   }
 
-  &:hover:not(:disabled) &__backdrop {
-    background-color: darken($color: color('primary'), $amount: 5);
-  }
+	&__text {
+		position: relative;
+		z-index: 1;
+	}
 
-  &:active:not(:disabled) &__backdrop {
-    left: spacing(1);
-    right: spacing(1);
-  }
+	&__start-icon,
+	&__end-icon {
+		display: flex;
+		align-items: center;
+	}
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
+	&__start-icon .icon {
+		margin-left: spacing(-0.5);
+		margin-right: spacing(0.5);
+	}
+
+	&:active:not(:disabled):not(.filled) &__backdrop {
+		left: spacing(1);
+		right: spacing(1);
+	}
 }

@@ -4,15 +4,26 @@
     "node": true
   },
   "extends": [
+    "eslint:recommended",
     "plugin:vue/vue3-essential"
   ],
   "rules": {
-    "quotes": ["warn", "single"],
+    "quotes": [
+      "warn",
+      "single"
+    ],
     "no-trailing-spaces": "warn",
-    "comma-dangle": ["warn", "always-multiline"],
+    "comma-dangle": [
+      "warn",
+      "always-multiline"
+    ],
     "no-console": "warn",
-    "semi": ["warn", "never"],
-    "vue/no-mutating-props": "off"
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "vue/no-mutating-props": "off",
+    "vue/no-parsing-error": "off"
   },
   "parserOptions": {
     "parser": "babel-eslint"

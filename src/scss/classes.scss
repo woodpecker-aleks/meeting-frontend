@@ -1,0 +1,10 @@
+@import '@scss/mixins';
+
+%interactive {
+  cursor: pointer;
+
+  &:disabled, &.disabled {
+    @include color('disabled');
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,38 @@
+@import "@scss/utils";
+
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: deep('medium');
+	pointer-events: none;
+
+	&__content {
+		pointer-events: visible;
+		transform-origin: top center;
+		animation: modal-opens 360ms timing('bounce');
+		border-radius: radius(2);
+		backdrop-filter: effect('blur');
+		padding: spacing(2);
+		margin-top: 50px + spacing(4);
+		max-width: 600px;
+		box-shadow: shadow('hard');
+	}
+}
+
+@keyframes modal-opens {
+	0% {
+		opacity: 0;
+		transform: scale(0.5) translateY(-40px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}

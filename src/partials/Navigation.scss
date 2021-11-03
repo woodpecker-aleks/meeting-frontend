@@ -1,0 +1,84 @@
+@import "@scss/utils";
+
+.nav {
+  @include color('secondary');
+	display: flex;
+	justify-content: flex-end;
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	left: 0;
+	backdrop-filter: useEffect('blur');
+  background-color: useColor('main', 0.9);
+	width: 100%;
+	z-index: deep("high");
+	transform: translate3d(-100%, 0, 0);
+	transition: background-color 200ms ease-in-out,
+		transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+
+	&.active {
+		box-shadow: useShadow("hard");
+    transform: translate3d(0%, 0, 0);    
+
+    @include fromBreakpoint('sm') {
+		  transform: translate3d(calc(-100% + 300px), 0, 0);    
+    }
+	}
+
+	&__droplist {
+		padding: spacing(1);
+		padding-bottom: 0;
+	}
+
+	&__container {
+		padding: spacing(2);
+
+    @include fromBreakpoint('sm') {
+		  width: 300px;
+    }
+	}
+
+	&__list {
+		@include list("y", spacing(0.5));
+	}
+
+	&__item-header {
+		background-color: transparent;
+		border: none;
+		color: inherit;
+		width: 100%;
+		position: relative;
+		display: flex;
+		text-align: left;
+		align-items: center;
+		cursor: pointer;
+		height: 36px;
+		padding: 0 spacing(2);
+	}
+
+	&__item-title {
+		font-weight: weight("bold");
+		margin-right: auto;
+		width: 70%;
+	}
+
+	&__item-backdrop {
+		border-radius: radius(1) !important;
+		transition: left 200ms useTiming("bounce"), right 200ms useTiming("bounce"),
+			opacity 200ms ease-in-out;
+	}
+
+	&__item-header:active &__item-backdrop {
+		left: spacing(1);
+		right: spacing(1);
+	}
+
+	&__item-icon {
+		margin-right: spacing(1);
+	}
+
+	&__divider {
+		margin: spacing(1) spacing(3);
+		padding-bottom: spacing(1);
+	}
+}

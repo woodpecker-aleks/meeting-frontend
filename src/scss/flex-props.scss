@@ -1,0 +1,45 @@
+@import '@scss/utils';
+
+@mixin getFlexProps($prefix: false) {
+  $prop-prefix: '';
+
+  @if($prefix) {
+    $prop-prefix: #{$prefix}-;
+  }
+
+  .ai-#{$prop-prefix}center {
+    align-items: center;
+  }
+
+  .ai-#{$prop-prefix}start {
+    align-items: flex-start;
+  }
+
+  .ai-#{$prop-prefix}end {
+    align-items: flex-end;
+  }
+
+  .jc-#{$prop-prefix}center {
+    justify-content: center;
+  }
+
+  .jc-#{$prop-prefix}start {
+    justify-content: flex-start;
+  }
+
+  .jc-#{$prop-prefix}end {
+    justify-content: flex-end;
+  }
+
+  .jc-#{$prop-prefix}between {
+    justify-content: space-between;
+  }
+}
+
+@include getFlexProps();
+
+@each $breakpointName, $breakpointValue in $breakpoints {
+  @media (min-width: $breakpointValue) {
+    @include getFlexProps($breakpointName);
+  }
+}

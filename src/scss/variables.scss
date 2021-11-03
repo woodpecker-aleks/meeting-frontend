@@ -1,47 +1,104 @@
+@import '@scss/functions';
+
+$spacing: 8px;
+$border-width: 2px;
+$border-radius: 8px;
+
+$breakpoints: (
+	xs: 375px,
+	sm: 768px,
+	md: 1024px,
+	lg: 1280px,
+	xl: 1440px,
+);
+
+$margins: (
+  1: spacing(1),
+  2: spacing(2),
+  3: spacing(3),
+  4: spacing(4),
+  5: spacing(5),
+);
+
+$grid: (
+  enable: true,
+  columns: 12,
+);
+
+$display: (
+  enable: true,
+  variants: (none, flex),
+);
+
 $colors: (
-  'primary': #6a1b9a,
-  'secondary': #f0f0f0,
-  'third': #ffffff,
-  'text': #424242,
-  'dark': #242424,
-  'danger': #b71c1c,
+  primary: (
+    main: #6a1b9a,
+    main-darken: #4f1474,
+    contrast: #f0f0f0,
+    contrast-darken: #b8b8b8,
+  ),
+  secondary: (
+    main: #f0f0f0,
+    main-darken: #b9b9b9,
+    contrast: #424242,
+    contrast-darken: #2e2e2e,
+  ),
+  danger: (
+    main: #b71c1c,
+    main-darken: #750b0b,
+    contrast: #f0f0f0,
+    contrast-darken: #d8d8d8,
+  ),
+  disabled: (
+    main: #d4d4d4,
+    main-darken: #b3b3b3,
+    contrast: #929292,
+    contrast-darken: #7c7c7c,
+  ),
+);
+
+$images: (
+  '16-9': 56.25%,
+  '1-1': 100%,
+  '4-3': 75%,
 );
 
 $fonts: (
-  'primary': ('Roboto', sans-serif),
+  primary: (-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif),
 );
 
 $weights: (
-  'regular': 400,
-  'bold': 700,
-);
-
-$breakpoints: (
-  'xs': 0px,
-  'sm': 600px,
-  'md': 960px,
-  'lg': 1280px,
-  'xl': 1440px,
-  'xxl': 1920px,
+  regular: 400,
+	medium: 500,
+	bold: 700,
 );
 
 $deeps: (
-  'default': 0,
-  'low': 10,
-  'medium': 20,
-  'high': 30,
+  default: 0,
+	low: 10,
+	medium: 20,
+	high: 30,
 );
 
 $box-shadows: (
-  'primary': 0px 15px 19px 8px rgba(73, 0, 118, 0.2),
-  'hard': 0px 4px 15px 1px rgba(68, 68, 68, 0.2),
+  primary: 0 10px 8px 6px useColor('main', 0.3),
+	hard: 0 4px 15px 1px useColor('contrast', 0.3),
+);
+
+$effects: (
+  blur: saturate(180%) blur(4px),
 );
 
 $timing-functions: (
-  'bounce': cubic-bezier(.35,0,.2,1.38),
+  bounce: cubic-bezier(.35, 0, .2, 1.38)
 );
 
-$backdrop-opacity: 0.2;
+$property-transitions: (
+  color: 200ms ease-in-out,
+  background-color: 200ms ease-in-out,
+  border-color: 200ms ease-in-out,
+);
 
-$spacing: 8px;
-$border-radius: 8px;
+$borders: (
+  primary: 2px solid currentColor,
+);

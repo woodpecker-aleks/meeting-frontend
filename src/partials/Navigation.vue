@@ -2,24 +2,15 @@
   <nav :class="['nav', navIsOpen && 'active']">
     <div class="nav__container">
       <ul class="nav__list">
-        <li
-          v-for="(item, index) of menu"
-          :key="index"
-          class="nav__item"
-        >
-          <div
-            class="nav__item-header"
-            @click="item.action"
-          >
-            <div class="nav__item-backdrop" />
-            <Icon
-              class="nav__item-icon"
-              :name="item.icon"
-            />
-            <span class="nav__item-title">
+        <li v-for="(item, index) of menu" :key="index" class="nav__item">
+          <button :tabindex="navIsOpen ? 1 : -1" class="nav__item-header" @click="item.action">
+            <Backdrop class="nav__item-backdrop" />
+            <Icon class="nav__item-icon" :name="item.icon" />
+            <Text singleLine class="nav__item-title">
               {{ trans(item.title) }}
-            </span>
+            </Text>
             <Switch
+              tabindex="-1"
               v-if="item.additional === 'Switch'"
               :checked="item.checked"
             />
@@ -28,7 +19,7 @@
               :name="item.secondIcon"
               :class="item.secondIconClasses + ' sm'"
             />
-          </div>
+          </button>
           <Dropdown
             v-if="item.additional === 'Dropdown'"
             :is-open="item.checked"
@@ -40,15 +31,15 @@
                 class="nav__item"
                 @click="itm.action"
               >
-                <div class="nav__item-header">
-                  <div class="nav__item-backdrop" />
-                  <span class="nav__item-title">
+                <button :tabindex="navIsOpen ? 1 : -1" class="nav__item-header">
+                  <Backdrop class="nav__item-backdrop" />
+                  <Text singleLine class="nav__item-title">
                     {{ trans(itm.title) }}
-                  </span>
-                </div>
+                  </Text>
+                </button>
               </li>
             </ul>
-            <Divider class="nav__divider" length="75" />
+            <Divider class="nav__divider" />
           </Dropdown>
         </li>
       </ul>
@@ -58,33 +49,17 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
-import Icon from '@components/Icon'
-import Switch from '@components/Switch.vue'
-import Dropdown from '@components/Dropdown.vue'
-import Divider from '@components/Divider.vue'
 
 export default {
   name: 'Navigation',
-  components: {
-    Icon,
-    Switch,
-    Dropdown,
-    Divider,
-  },
   data() {
     return {
       langIsOpen: false,
     }
   },
   computed: {
-    ...mapState([
-      'appTheme',
-      'navIsOpen',
-      'notifications',
-    ]),
-    ...mapGetters([
-      'trans',
-    ]),
+    ...mapState(['appTheme', 'navIsOpen', 'notifications']),
+    ...mapGetters(['trans']),
     menu() {
       return [
         {
@@ -136,13 +111,8 @@ export default {
     },
   },
   methods: {
-    ...mapMutations([
-      'toggleTheme',
-      'toggleNotifications',
-    ]),
-    ...mapActions([
-      'updateLang',
-    ]),
+    ...mapMutations(['toggleTheme', 'toggleNotifications']),
+    ...mapActions(['updateLang']),
     toggleExpandLags() {
       this.langIsOpen = !this.langIsOpen
     },
@@ -150,4 +120,4 @@ export default {
 }
 </script>
 
-<style src="@components/Navigation.scss" lang="scss"></style>
+<style src="@partials/Navigation.scss" lang="scss"></style>

@@ -1,0 +1,28 @@
+@use 'sass:map';
+@import '@scss/utils';
+
+$display-enabled: map-get($map: $display, $key: enable);
+
+@mixin getDisplays($prefix: false) {
+  @each $displayValue in map-get($map: $display, $key: variants) {
+    $display-prefix: $displayValue;
+
+    @if($prefix) {
+      $display-prefix: #{$prefix}-#{$displayValue};
+    }
+
+    .d-#{$display-prefix} {
+      display: $displayValue !important;
+    }
+  }
+}
+
+@if($display-enabled) {
+  @include getDisplays(); 
+
+  @each $breakpointName, $breakpointValue in $breakpoints {    
+    @media (min-width: $breakpointValue) {
+      @include getDisplays($breakpointName);
+    }
+  }
+}

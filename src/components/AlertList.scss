@@ -1,0 +1,17 @@
+@import '@scss/utils';
+
+.alert-list {
+	position: fixed;
+	top: 50px;
+	right: 0;
+	bottom: 0;
+	width: 25%;
+	padding: spacing(2);
+	z-index: deep('high');
+	pointer-events: none;
+
+	&>* {
+		pointer-events: visible;
+		margin-bottom: spacing(2);
+	}
+}

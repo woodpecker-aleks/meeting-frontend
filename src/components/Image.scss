@@ -1,0 +1,44 @@
+@import '@scss/utils';
+
+.image {
+  width: 100%;
+  border-radius: radius(1);
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  padding-bottom: 50%;
+  background-color: useColor('main-darken');
+  color: useColor('contrast');
+
+  &__content, &__alt, &__skeleton {
+    @include absolute;
+    @include size(100%);
+  }
+
+  &__content {
+    content-visibility: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center;  
+  }
+
+  &__alt {
+    padding: spacing(1);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__icon {
+    @include size(36px);
+    margin-bottom: spacing(1);
+  }
+
+  @each $formatName, $formatValue in $images {
+    &.format_#{$formatName} {
+      padding-bottom: $formatValue;
+    }
+  }
+}

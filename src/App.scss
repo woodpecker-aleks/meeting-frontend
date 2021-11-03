@@ -1,22 +1,29 @@
 @import '@scss/reset';
-@import '@scss/utils';
 @import '@scss/base';
 
-.app {
-  font-family: font('primary');
-  font-weight: weight('regular');
-  background-color: color('secondary');
-  color: color('text');
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px + spacing(2);
-  transition-property: color, background-color;
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
+:root {
+	--text_font-scale: 1;
+}
 
-  &.dark-theme {
-    background-color: color('text');
-    color: color('secondary');
-  }
+body {
+	background-color: color('secondary');
+	font-size: 18px;
+}
+
+::selection {
+	background-color: useColor('contrast');
+	color: useColor('main');
+}
+
+.app {
+	height: 100%;
+	padding-top: 50px;
+	font-family: useFont('primary');
+	font-weight: weight('regular');
+	min-height: 120vh;
+	display: flex;
+	flex-direction: column;
+	transition-property: color, background-color;
+	transition-duration: 200ms;
+	transition-timing-function: ease-in-out;
 }

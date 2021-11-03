@@ -1,5 +1,8 @@
 <template>
-  <svg :class="['icon']">
+  <svg
+    class="icon"
+    v-bind="$attrs"
+  >
     <use :xlink:href="'#' + name" />
   </svg>
 </template>
@@ -8,7 +11,10 @@
 export default {
   name: 'Icon',
   props: {
-    name: String,
+    name: {
+      type: String,
+      required: true,
+    },
   },
 }
 </script>

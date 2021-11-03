@@ -1,38 +1,57 @@
 <template>
-  <label :class="['checkbox', value && 'checked']">
+  <button
+    @click="handleChange"
+    class="checkbox label-focus-watcher backdrop__control"
+    :class="[value && 'checked']"
+    :disabled="disabled"
+  >
     <div class="checkbox__fake">
-      <div class="checkbox__backdrop" />
+      <Backdrop class="checkbox__backdrop" />
+      <Icon
+        name="check"
+        class="checkbox__fake-icon _checked_"
+      />
       <Icon
         name="check"
         class="checkbox__fake-icon"
       />
     </div>
     <input
+      :disabled="disabled"
+      tabindex="-1"
+      :id="id"
       type="checkbox"
       class="checkbox__control"
       :checked="value"
       v-bind="$attrs"
-    >
-    <p
-      v-if="label"
-      class="checkbox__label"
-    >
-      <slot />
-    </p>
-  </label>
+    />
+  </button>
 </template>
 
 <script>
-import Icon from './Icon.vue'
+import Icon from '@components/Icon.vue'
+import Backdrop from '@components/Backdrop.vue'
 
 export default {
+  name: 'Checkbox',
   components: {
     Icon,
+    Backdrop,
   },
-  name: 'Checkbox',
   props: {
-    label: Boolean,
-    value: Boolean,
+    disabled: Boolean,
+    id: String,
+    value: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  methods: {
+    handleChange(e) {
+      e.target.value = !this.value
+
+      this.$emit('change', e)
+    },
   },
 }
 </script>

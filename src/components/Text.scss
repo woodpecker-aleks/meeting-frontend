@@ -1,0 +1,73 @@
+@import '@scss/utils';
+
+.text {
+	--text_line-clamp: none;
+
+  color: currentColor;
+	position: relative;
+
+	&_p {
+		font-size: calc(var(--text_font-scale) * 1rem);
+		line-height: 150%;
+	}
+
+	&_sub {
+		opacity: 0.7;
+	}
+
+	&_h6 {
+		font-weight: weight('medium');
+		font-size: calc(var(--text_font-scale) * 1.1rem);
+	}
+
+	&_h5 {
+		font-weight: weight('medium');
+		font-size: calc(var(--text_font-scale) * 1.3rem);
+	}
+
+	&_h4 {
+		font-weight: weight('medium');
+		font-size: calc(var(--text_font-scale) * 1.4rem);
+	}
+
+	&_h3 {
+		font-weight: weight('bold');
+		font-size: calc(var(--text_font-scale) * 1.6rem);
+	}
+
+	&_h2 {
+		font-weight: weight('bold');
+		font-size: calc(var(--text_font-scale) * 1.8rem);
+	}
+
+	&_h1 {
+		font-weight: weight('bold');
+		font-size: calc(var(--text_font-scale) * 2rem);
+	}
+
+	&__content {
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: var(--text_line-clamp);
+		line-clamp: var(--text_line-clamp);
+		max-width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		-webkit-font-smoothing: antialiased;
+
+    &::selection {
+      background-color: var(--contrast-color);
+      color: var(--main-color);
+    }
+	}
+}
+
+b {
+  font-weight: 600;
+}
+
+i {
+  font-style: italic;
+}

@@ -1,0 +1,19 @@
+@import '@scss/utils';
+
+.home {
+	&__container {
+		flex-direction: column;
+		padding-top: spacing(4);
+	}
+
+	.section {
+		margin-bottom: spacing(5);
+	}
+
+	&__scrollbar {
+		height: 200px;
+	}
+
+  &__input-section {
+  }
+}

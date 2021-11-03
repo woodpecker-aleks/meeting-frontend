@@ -4,7 +4,16 @@ import App from '@/App.vue'
 import store from '@/store'
 import router from '@/router'
 
-createApp(App)
+const app = createApp(App)
+
+export default app
+
+
+require('@components')
+require('@utils/clickOutsideDirective')
+require('@utils/autoFocusDirective')
+
+app
   .use(store)
   .use(router)
   .mount('#app')

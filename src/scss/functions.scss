@@ -1,37 +1,71 @@
 @use 'sass:map';
 
 @function spacing($pow) {
-  @return $pow * $spacing;
+	@return $pow * $spacing;
 }
 
 @function radius($pow) {
-  @return $pow * $border-radius;
+	@return $pow * $border-radius;
 }
 
-@function font($name) {
-  @return map-get($map: $fonts, $key: $name);
+@function useFont($name) {
+	@return map-get($map: $fonts, $key: $name);
 }
 
 @function breakpoint($name) {
-  @return map-get($map: $breakpoints, $key: $name);
+	@return map-get($map: $breakpoints, $key: $name);
 }
 
 @function weight($name) {
-  @return map-get($map: $weights, $key: $name);
-}
-
-@function color($name) {
-  @return map-get($map: $colors, $key: $name);
+	@return map-get($map: $weights, $key: $name);
 }
 
 @function deep($name) {
-  @return map-get($map: $deeps, $key: $name);
+	@return map-get($map: $deeps, $key: $name);
 }
 
-@function shadow($name) {
-  @return map-get($map: $box-shadows, $key: $name);
+@function useShadow($name) {
+	@return map-get($map: $box-shadows, $key: $name);
 }
 
-@function timing($name) {
-  @return map-get($map: $timing-functions, $key: $name);
+@function useTiming($name) {
+	@return map-get($map: $timing-functions, $key: $name);
+}
+
+@function useEffect($name) {
+	@return map-get($map: $effects, $key: $name);
+}
+
+@function useBorder($name) {
+	@return map-get($map: $borders, $key: $name);
+}
+
+@function useTransition($name) {
+  @return #{$name + ' ' + map-get($map: $property-transitions, $key: $mame)};
+}
+
+@function if($condition, $true, $false) {
+	@if $condition {
+		@return $true;
+	}
+
+	@else {
+		@return $false;
+	}
+}
+
+@function asset($path) {
+	@return url('@assets/#{$path}');
+}
+
+@function getRGBList($color) {
+  @return red($color) + ', ' + green($color) + ', ' + blue($color);
+}
+
+@function useColor($colorName, $opacity: false) {
+  @if ($opacity) {
+    @return #{'rgba(var(--' + $colorName +  '-color),' + $opacity + ')'};
+  } @else {
+    @return #{'rgb(var(--' + $colorName +  '-color))'};
+  }
 }

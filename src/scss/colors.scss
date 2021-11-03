@@ -1,0 +1,38 @@
+@use 'sass:map';
+@import '@scss/utils';
+
+@mixin getColors($prefix: false) {
+  @each $colorName, $colorMap in $colors {
+    $main-color: map-get($map: $colorMap, $key: 'main');
+    $main-darken-color: map-get($map: $colorMap, $key: 'main-darken');
+    $contrast-color: map-get($map: $colorMap, $key: 'contrast');
+    $contrast-darken-color: map-get($map: $colorMap, $key: 'contrast-darken');
+    $color-prefix: $colorName;
+
+    @if($prefix) {
+      $color-prefix: #{$prefix}-#{$colorName};
+    }
+
+    .clr-#{$color-prefix} {
+      --main-color: #{getRGBList($main-color)};
+      --main-darken-color: #{getRGBList($main-darken-color)};
+      --contrast-color: #{getRGBList($contrast-color)};
+      --contrast-darken-color: #{getRGBList($contrast-darken-color)};
+    }
+
+    .clr-#{$color-prefix}-reverse {
+      --main-color: #{getRGBList($contrast-color)};
+      --main-darken-color: #{getRGBList($contrast-darken-color)};
+      --contrast-color: #{getRGBList($main-color)};
+      --contrast-darken-color: #{getRGBList($main-darken-color)};
+    }
+  }
+}
+
+@include getColors();
+
+@each $breakpointName, $breakpointValue in $breakpoints {
+  @media (min-width: $breakpointValue) {
+    @include getColors($breakpointName);
+  }
+}

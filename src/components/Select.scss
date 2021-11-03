@@ -1,0 +1,91 @@
+@import "@scss/utils";
+
+$input-height: 36px;
+
+.select {
+	max-width: 230px;
+	cursor: pointer;
+	position: relative;
+	height: $input-height;
+	padding: 0 spacing(2);
+	font-weight: weight("medium");
+	text-align: left;
+	margin-left: spacing(-2);
+	line-height: $input-height;
+	color: color("text");
+
+	@include theme("dark") {
+		color: color("secondary");
+	}
+
+	&_open &__dropdown-icon {
+		transform: rotate(90deg);
+	}
+
+	&__control {
+		display: none;
+	}
+
+	&__text {
+		--text_line-clamp: 1;
+	}
+
+	&__selected {
+		height: 100%;
+		border-radius: radius(1);
+		position: relative;
+
+		&.empty {
+			opacity: 0.7;
+		}
+	}
+
+	&__backdrop {
+		right: spacing(-2);
+		bottom: 0;
+		left: spacing(-2);
+		transition: left 200ms timing("bounce"), right 200ms timing("bounce"),
+			opacity 200ms ease-in-out;
+		height: $input-height;
+	}
+
+	&__dropdown-icon {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		margin: auto 0;
+	}
+
+	&:active &__backdrop {
+		left: spacing(-1);
+		right: spacing(-1);
+	}
+
+	&:hover &__divider,
+	&:focus &__divider {
+		opacity: 0;
+	}
+
+	&__required {
+		position: absolute;
+		bottom: $input-height / 3;
+		left: spacing(2);
+		font-size: 20px;
+		line-height: 24px;
+	}
+
+	&__backdrop {
+		position: absolute;
+	}
+
+	&__divider {
+		position: absolute;
+		left: spacing(2);
+		right: spacing(2);
+		bottom: spacing(0.5);
+		transition-property: opacity, background-color;
+		transition-duration: 200ms;
+		transition-timing-function: ease-in-out;
+	}
+}

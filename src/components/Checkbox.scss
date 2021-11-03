@@ -1,70 +1,63 @@
-@import '@scss/utils';
+@import "@scss/utils";
 
 .checkbox {
-  display: flex;
-  align-items: center;
-  border-radius: radius(1);
-  padding: 0 spacing(2);
-  cursor: pointer;
-  @include disableTapHighlight;
+  --backdrop-spacing: #{spacing(1)};
 
-  &__control {
-    display: none;
+  @include color('primary');
+	@extend %interactive;
+	display: flex;
+  border: none;
+	align-items: center;
+	border-radius: radius(1);
+	padding: 0 var(--backdrop-spacing);
+  color: useColor('main');
+
+	&__control {
+		display: none;
+	}
+
+	&__fake {
+		position: relative;
+		@include size(26px);
+		border-radius: inherit;
+	}
+
+  &__fake-icon:not(._checked_) {
+    transition: clip-path 200ms ease-in-out;
+    clip-path: circle(100%);
+    background-color: useColor('background');
+    overflow: hidden;
+    color: useColor('contrast-darken');
   }
 
-  &__fake {
-    position: relative;
-    @include size(26px);
+	&__fake-icon, &__fake-icon._checked_ {
+		position: absolute;
+		@include size(calc(100%));
+    @include position(0);
     border-radius: inherit;
-    border: 2px solid color('primary');
-    transition: background-color 200ms ease-in-out;
-  }
+		border: $border-width solid useColor('main');
+	}
 
-  &__fake-icon {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: -1px;
-    opacity: 0.5;
-    opacity: background-color 200ms ease-in-out, color 200ms ease-in-out;
-  }
-
-  &__backdrop {
-    position: absolute;
-    top: spacing(-1);
-    right: spacing(-1);
-    bottom: spacing(-1);
-    left: spacing(-1);
-    opacity: 0;
-    border-radius: 50%;
-    background-color: currentColor;
-    transition: left 200ms timing('bounce'), right 200ms timing('bounce'), top 200ms timing('bounce'), bottom 200ms timing('bounce'), opacity 200ms ease-in-out, border-radius 200ms linear;
-  }
-
-  &__label {
-    margin-left: spacing(1.5);
-  }
-
-  &:hover &__backdrop {
-    opacity: $backdrop-opacity;
-  }
-
-  &.checked &__fake {
-    background-color: color('primary');
+  &__fake-icon._checked_ {
+    color: useColor('contrast');
+    background-color: useColor('main');
     opacity: 1;
   }
 
-  &.checked &__fake-icon {
-    color: color('secondary');
-    opacity: 1;
+	&__backdrop {
+		@include absolute(#{calc(var(--backdrop-spacing) * -1)});
+		border-radius: 50%;
+		transition: left 260ms useTiming("bounce"), right 260ms useTiming("bounce"),
+			top 260ms useTiming("bounce"), bottom 260ms useTiming("bounce"),
+			opacity 200ms ease-in-out, border-radius 260ms useTiming("bounce");
+	}
+
+  &.checked &__fake-icon:not(._checked_) {
+    clip-path: circle(0%);
   }
 
-  &:active &__backdrop {
-    border-radius: inherit;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
-  }
+	&:active &__backdrop, &.active &__backdrop {
+		border-radius: inherit;
+		@include position(0px);
+	}
 }

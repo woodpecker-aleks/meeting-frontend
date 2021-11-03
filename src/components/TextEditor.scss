@@ -1,0 +1,11 @@
+@import "@scss/utils";
+
+.text-editor {
+  &__control {
+    margin-bottom: spacing(1);
+
+    .divider {
+      height: 30px;
+    }
+  }
+}

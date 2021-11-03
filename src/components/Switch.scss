@@ -1,36 +1,64 @@
 @import '@scss/utils';
 
-$switch-height: 24px;
-
 .switch {
-  color: color('text');
-  cursor: pointer;
-  height: $switch-height;
-  border-radius: $switch-height / 2;
-  width: $switch-height * 1.8;
-  border: 2px solid currentColor;
-  background-color: transparent;
-  position: relative;
+  --backdrop-spacing: #{spacing(1)};
+  --switch-height: 26px;
 
-  &__thumb {
-    position: absolute;
-    @include size($switch-height / 1.5);
-    border-radius: inherit;
-    border: 3px solid currentColor;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    left: 3px;
-    right: auto;
-    transition: left 200ms timing('bounce'), background-color 200ms ease-in-out;
+  @extend %interactive;
+  color: useColor('main');
+	background-color: transparent;
+  border: none;
+  padding: 0 var(--backdrop-spacing);
+
+  &__wrapper {
+	  position: relative;
+	  border: $border-width solid currentColor;
+    height: var(--switch-height);
+    border-radius: calc(var(--switch-height) / 2);
+    min-width: calc(var(--switch-height) * 1.8);
   }
 
-  &.active &__thumb {
-    left: calc(100% - 3px - #{$switch-height / 1.5});
-    background-color: currentColor;
+  &__backdrop {
+    @include position(#{calc(var(--backdrop-spacing) * -1)});
+    border-radius: calc(var(--switch-height) + var(--backdrop-spacing) / 2);
   }
-}
 
-.dark-theme .switch {
-  color: color('secondary');
+	&__thumb {
+		position: absolute;
+		@include size(#{calc(var(--switch-height) / 1.6)});
+		border-radius: 50%;
+		top: 0;
+		bottom: 0;
+		margin: auto 0;
+		left: 3px;
+		right: auto;
+		transition: left 200ms useTiming('bounce'), background-color 200ms ease-in-out;
+		background-color: currentColor;
+
+    &::after {
+      content: '';
+      position: absolute;
+      @include position(3px);
+      border-radius: inherit;
+      transition: clip-path 200ms ease-in-out;
+      background-color: useColor('background');
+      clip-path: circle(100%);
+    }
+	}
+
+	&.checked &__thumb {
+		left: calc(100% - 3px - (var(--switch-height) / 1.6));
+	}
+
+  &.checked &__thumb::after {
+    clip-path: circle(0%);
+  }
+
+  &.active &__backdrop, &:active &__backdrop {
+    @include position(-1px);
+  }
+
+  &[disabled] &__thumb {
+    color: useColor('contrast');
+  }
 }

@@ -1,42 +1,27 @@
-@import '@scss/utils';
+@import "@scss/utils";
 
 .icon-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-  border-radius: 50%;
-  border: 0;
-  background-color: transparent;
-  color: inherit;
-  padding: spacing(1);
-  @include size(40px);
-  @include disableTapHighlight;
+	@extend %interactive;
+	position: relative;
+	border-radius: 50%;
+	border: 0;
+	background-color: transparent;
+	color: inherit;
+	padding: spacing(1);
+	outline: none;
+  padding: 0;
+	@include size(36px);
 
-  &.sm {
-    padding: 0;
-    @include size(32px);
+	&.sm {
+		@include size(24px);
+	}
+
+  .icon {
+    @include absolute;
+    margin: auto;
   }
 
-  &__backdrop {
-    background-color: currentColor;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    transition: transform 260ms timing('bounce'), opacity 200ms ease-in-out;
-  }
-
-  &:hover &__backdrop {
-    opacity: $backdrop-opacity;
-  }
-
-  &:active &__backdrop {
-    transform: scale3d(0.8, 0.8, 0.8);
-  }
+	&:active &__backdrop {
+		transform: scale3d(0.85, 0.85, 1);
+	}
 }

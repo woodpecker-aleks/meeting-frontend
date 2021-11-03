@@ -1,0 +1,58 @@
+@import "@scss/utils";
+
+.radio {
+  --backdrop-spacing: #{spacing(1)};
+
+  @include color('primary');
+	@extend %interactive;
+	display: flex;
+  border: none;
+	align-items: center;
+	border-radius: 50%;
+	padding: 0 var(--backdrop-spacing);
+  color: useColor('main');
+
+	&__control {
+		display: none;
+	}
+
+	&__fake {
+    border: $border-width solid useColor('main');
+		position: relative;
+		@include size(26px);
+		border-radius: inherit;
+    background-color: useColor('background');
+
+    &::before, &::after {
+      border-radius: inherit;
+      content: '';
+      @include absolute;
+		  @include size(14px);
+      background-color: useColor('contrast-darken');
+      margin: auto;
+    }
+
+    &::after {
+      background-color: useColor('main');
+      transition: clip-path 200ms ease-in-out;
+      clip-path: circle(0%);
+    }
+	}
+
+	&__backdrop {
+		@include absolute(#{calc(var(--backdrop-spacing) * -1)});
+		border-radius: 50%;
+		transition: left 260ms useTiming("bounce"), right 260ms useTiming("bounce"),
+			top 260ms useTiming("bounce"), bottom 260ms useTiming("bounce"),
+			opacity 200ms ease-in-out, border-radius 260ms useTiming("bounce");
+	}
+
+	&:active &__backdrop, &.active &__backdrop {
+		border-radius: inherit;
+		@include position(-1px);
+	}
+
+  &.checked &__fake::after {
+    clip-path: circle(100%);
+  }
+}

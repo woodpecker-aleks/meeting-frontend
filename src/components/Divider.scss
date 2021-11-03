@@ -1,20 +1,22 @@
+@import '@scss/utils';
+
 .divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	opacity: 0.5;
+  width: 100%;
+  height: 0px;
 
-  &__line {
-    background-color: currentColor;
-    height: 1px;
-    width: 100%;  
+	&__line {
+		border-top: useBorder('primary');
+    width: 100%;
+    height: 100%;
+	}
 
-    &.lenght-75 {
-      width: 75%;
-    }
+  &.vertical {
+    height: 100%;
+    width: 0px;
+  }
 
-    &.vertical {
-      height: 100%;
-      width: 1px;
-    }
+  &.vertical &__line {
+		border-left: useBorder('primary');
   }
 }

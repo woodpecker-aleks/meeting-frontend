@@ -12,6 +12,7 @@ module.exports = {
         '@': join(__dirname, vueSrc),
         '@scss': join(__dirname, vueSrc, '/scss'),
         '@components': join(__dirname, vueSrc, '/components'),
+        '@partials': join(__dirname, vueSrc, '/partials'),
         '@utils': join(__dirname, vueSrc, '/utils'),
         '@api': join(__dirname, vueSrc, '/api'),
         '@pages': join(__dirname, vueSrc, '/pages'),

@@ -4,6 +4,7 @@
     :class="['dropdown', isOpen && 'active']"
   >
     <div
+      v-if="isOpen"
       ref="dropdownContainer"
       class="dropdown__container"
     >
@@ -18,11 +19,19 @@ export default {
   props: {
     isOpen: Boolean,
   },
+  mounted() {
+    this.checkIsOpen()
+  },
   updated() {
-    const { dropdown, dropdownContainer } = this.$refs
+    this.checkIsOpen()
+  },
+  methods: {
+    checkIsOpen() {
+      const { dropdown, dropdownContainer } = this.$refs
 
-    dropdown.style.maxHeight = this.isOpen ? dropdownContainer.scrollHeight + 'px' : '0px'
-    dropdown.style.minHeight = this.isOpen ? dropdownContainer.scrollHeight + 'px' : '0px'
+      dropdown.style.maxHeight = this.isOpen ? dropdownContainer.scrollHeight + 'px' : '0px'
+      dropdown.style.minHeight = this.isOpen ? dropdownContainer.scrollHeight + 'px' : '0px'
+    },
   },
 }
 </script>

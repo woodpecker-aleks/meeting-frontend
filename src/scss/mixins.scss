@@ -1,40 +1,125 @@
+@use 'sass:map';
+@import '@scss/variables';
+@import '@scss/functions';
+
 @mixin size($size) {
-  width: $size;
-  height: $size;
-  min-width: $size;
+	width: $size;
+	height: $size;
+	min-width: $size;
 }
 
-@mixin from-breakpoint($breakpoint) {
-  @media (min-width: breakpoint($breakpoint)) {
-    @content;
+@mixin color($name, $reverse: false) {
+  $colorMap: map-get($map: $colors, $key: $name);
+  $main-color: map-get($map: $colorMap, $key: 'main');
+  $main-darken-color: map-get($map: $colorMap, $key: 'main-darken');
+  $contrast-color: map-get($map: $colorMap, $key: 'contrast');
+  $contrast-darken-color: map-get($map: $colorMap, $key: 'contrast-darken');
+
+  @if ($reverse) {
+    --main-color: #{getRGBList($contrast-color)};
+    --main-darken-color: #{getRGBList($contrast-darken-color)};
+    --contrast-color: #{getRGBList($main-color)};
+    --contrast-darken-color: #{getRGBList($main-darken-color)};  
+  } @else {
+    --main-color: #{getRGBList($main-color)};
+    --main-darken-color: #{getRGBList($main-darken-color)};
+    --contrast-color: #{getRGBList($contrast-color)};
+    --contrast-darken-color: #{getRGBList($contrast-darken-color)};
   }
+}
+
+@mixin fromBreakpoint($breakpoint) {
+	@media (min-width: breakpoint($breakpoint)) {
+		@content;
+	}
+}
+
+@mixin toBreakpoint($breakpoint) {
+	@media (max-width: #{breakpoint($breakpoint) + 1px}) {
+		@content;
+	}
+}
+
+@mixin position($position: 0) {
+	top: $position;
+	right: $position;
+	bottom: $position;
+	left: $position;
+}
+
+@mixin absolute($position: 0) {
+	top: $position;
+	right: $position;
+	bottom: $position;
+	left: $position;
+	position: absolute;
 }
 
 @mixin align($side) {
-  @if $side == 'left' {
-    margin-right: auto;
-  } @else if $side == 'right' {
-    margin-left: auto;
-  } @else if $side == 'top' {
-    margin-bottom: auto;
-  } @else if $side == 'bottom' {
-    margin-top: auto;
-  } @else if $side == 'x' {
-    margin {
-      left: auto;
-      right: auto;
-    }
-  } @else if $side == 'y' {
-    margin {
-      top: auto;
-      bottom: auto;
-    }
-  } @else if $side == 'center' {
-    margin: auto;
-  }
+	@if $side=="left" {
+		margin-right: auto;
+	}
+
+	@else if $side=="right" {
+		margin-left: auto;
+	}
+
+	@else if $side=="top" {
+		margin-bottom: auto;
+	}
+
+	@else if $side=="bottom" {
+		margin-top: auto;
+	}
+
+	@else if $side=="x" {
+		margin {
+			left: auto;
+			right: auto;
+		}
+	}
+
+	@else if $side=="y" {
+		margin {
+			top: auto;
+			bottom: auto;
+		}
+	}
+
+	@else if $side=="center" {
+		margin: auto;
+	}
+}
+
+@mixin list($direction: "x", $spacing: spacing(1)) {
+	display: flex;
+
+	&>* {
+		@content;
+	}
+
+	@if $direction=="x" {
+		&>*:not(:last-child) {
+			margin-right: $spacing;
+		}
+	}
+
+	@else {
+		flex-direction: column;
+
+		&>*:not(:last-child) {
+			margin-bottom: $spacing;
+		}
+	}
 }
 
 @mixin disableTapHighlight {
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  -webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-tap-highlight-color: transparent;
+}
+
+@mixin theme($theme) {
+	@at-root .#{$theme}-theme & {
+		@content;
+	}
 }

@@ -1,5 +1,9 @@
 import axios from 'axios'
 
-const getLang = (lang) => axios.get(`/lang/${lang}`)
+const LangApi = {
+  async get(lang) {
+    return await axios.get(`/lang/${lang}`)
+  },
+}
 
-export default getLang
+export default LangApi

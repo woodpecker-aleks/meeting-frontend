@@ -1,15 +1,19 @@
 <template>
-  <label
+  <button
     :for="id ?? name"
-    :class="['input', enteredType === 'password' && 'password', capitalize && 'capitalize', !value && 'empty', error && 'error']"
+    :disabled="disabled"
+    class="input backdrop__control"
+    :class="[
+      error && 'error',
+      disabled && 'disabled',
+      $slots.icon && 'input_with-icon',
+      capitalize && 'capitalize',
+      !value && 'input_empty',
+      inFocus && 'focus',
+      isActive && 'active',
+    ]"
   >
-    <Dropdown
-      class="input__error"
-      :isOpen="Boolean(error)"
-    >
-      {{ error }}
-    </Dropdown>
-    <div class="input__backdrop" />
+    <Backdrop class="input__backdrop" />
     <div class="input__wrapper">
       <div
         v-if="required"
@@ -18,53 +22,53 @@
         *
       </div>
       <input
+        :disabled="disabled"
+        ref="inputControl"
+        @keydown="handleKeyDown"
+        @keyup="handleKeyUp"
+        @focus="inFocus = true"
+        @blur="inFocus = false"
         :id="id ?? name"
-        v-bind="$attrs"
-        :type="enteredType"
-        class="input__control"
+        :value="value"
+        @input="handleInput"
+        class="input__control text text_p"
         :required="required"
         :name="name"
+        v-bind="$attrs"
       />
-      <IconBtn
-        v-if="type === 'password'"
-        @click="toggleType"
-        class="input__icon sm"
-      >
-        <Icon
-          v-if="enteredType === 'text'"
-          name="open-eye"
-        />
-        <Icon
-          v-else
-          name="close-eye"
-        />
-      </IconBtn>
+      <transition :name="iconTransitionName">
+        <IconBtn
+          v-if="$slots.icon"
+          @click="handleIconActive"
+          class="input__icon sm"
+        >
+          <slot name="icon" />
+        </IconBtn>
+      </transition>
     </div>
     <Divider class="input__divider" />
-  </label>
+  </button>
 </template>
 
 <script>
+import Backdrop from './Backdrop.vue'
 import Divider from './Divider.vue'
-import Dropdown from './Dropdown.vue'
-import Icon from './Icon.vue'
 import IconBtn from './IconBtn.vue'
 
 export default {
   components: {
     Divider,
-    Icon,
     IconBtn,
-    Dropdown,
+    Backdrop,
   },
   name: 'Input',
   props: {
-    type: {
-      type: String,
-      default: 'text',
-    },
+    error: Boolean,
+    disabled: Boolean,
+    iconTransitionName: String,
+    onIconActive: Function,
+    ignoreSymbols: Array,
     capitalize: Boolean,
-    error: String,
     value: String,
     required: Boolean,
     name: {
@@ -75,12 +79,38 @@ export default {
   },
   data() {
     return {
-      enteredType: this.type,
+      inFocus: false,
+      isActive: false,
     }
   },
   methods: {
-    toggleType() {
-      this.enteredType = this.enteredType === 'password' ? 'text' : 'password'
+    handleIconActive(e) {
+      this.onIconActive(e)
+
+      this.$refs.inputControl.focus()
+    },
+    handleKeyDown(e) {
+      if (e.code === 'Enter') this.isActive = true
+    },
+    handleKeyUp(e) {
+      if (e.code === 'Enter') this.isActive = false
+    },
+    handleInput(e) {
+      if (this.ignoreSymbols) {
+        const fixedValue = this.ignoreSymbols.forEach((symbol) => {
+          e.target.value = e.target.value.replaceAll(symbol, '')
+        })
+
+        e = {
+          ...e,
+          target: {
+            ...e.target,
+            value: fixedValue,
+          },
+        }
+      }
+
+      this.$emit('input', e)
     },
   },
 }

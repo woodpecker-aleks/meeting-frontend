@@ -1,95 +1,20 @@
 <template>
   <Page>
-    <div class="register-page__container container">
-      <h1 class="register-page__title">Meetup</h1>
-      <Input
-        @blur.once="touch('name')"
-        @input="setField($event, 'name')"
-        @blur="validateForm"
-        :value="fields.name"
-        :error="errors.name"
-        name="name"
-        capitalize
-        required
-        :placeholder="trans('name.title')"
-      />
-      <Input
-        @blur.once="touch('surname')"
-        @input="setField($event, 'surname')"
-        @blur="validateForm"
-        :value="fields.surname"
-        :error="errors.surname"
-        name="surname"
-        capitalize
-        required
-        :placeholder="trans('surname.title')"
-      />
-      <Input
-        @blur.once="touch('email')"
-        @input="setField($event, 'email')"
-        @blur="validateForm"
-        :value="fields.email"
-        :error="errors.email"
-        name="email"
-        required
-        :placeholder="trans('email.title')"
-      />
-      <Input
-        @blur.once="touch('password')"
-        @input="setField($event, 'password')"
-        @blur="validateForm"
-        :value="fields.password"
-        :error="errors.password"
-        name="password"
-        type="password"
-        required
-        :placeholder="trans('password.title')"
-      />
-      <Input
-        @blur.once="touch('confirmPassword')"
-        @input="setField($event, 'confirmPassword')"
-        @blur="validateForm"
-        :value="fields.confirmPassword"
-        :error="errors.confirmPassword"
-        name="confirmPassword"
-        type="password"
-        required
-        :placeholder="trans('confirm-password.title')"
-      />
-      <Checkbox
-        @click="fields.confirmPrivacy = !fields.confirmPrivacy"
-        :value="fields.confirmPrivacy"
-        :label="true"
-      >
-        Confirm privacy policy
-      </Checkbox>
-      <Button :disabled="!canSubmit" class="register-page__submit">
-        {{ trans('register.title') }}
-      </Button>
-      <Link to="/login">
-        {{ trans('login.title') }}
-      </Link>
-    </div>
+    <Container>
+      <Form :fields="1" />
+    </Container>
   </Page>
 </template>
 
 <script>
 import Page from '@layouts/Page.vue'
-import Input from '@components/Input.vue'
-import Button from '@components/Button.vue'
-import Link from '@components/Link.vue'
 import { mapGetters } from 'vuex'
 import { emailRegExp, passwordRegExp } from '@utils/constants'
-import Checkbox from '../components/Checkbox.vue'
 
 export default {
   name: 'Register',
   components: {
     Page,
-    Button,
-    Input,
-    Link,
-    Checkbox,
   },
   data() {
     return {
@@ -100,6 +25,14 @@ export default {
         password: '',
         confirmPassword: '',
         confirmPrivacy: false,
+        theme: {
+          selected: '',
+          values: [
+            { value: 'dark', title: 'Dark' },
+            { value: 'light', title: 'Light' },
+            { value: 'custom', title: 'Custom' },
+          ],
+        },
       },
       touched: {
         name: false,
@@ -107,6 +40,7 @@ export default {
         email: false,
         password: false,
         confirmPassword: false,
+        theme: false,
       },
       errors: {
         name: '',
@@ -118,9 +52,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'trans',
-    ]),
+    ...mapGetters(['trans']),
     canSubmit() {
       for (const touched of Object.values(this.touched)) {
         if (!touched) return false
@@ -129,6 +61,8 @@ export default {
       for (const error of Object.values(this.errors)) {
         if (error) return false
       }
+
+      if (!this.fields.confirmPrivacy) return false
 
       return true
     },
@@ -156,24 +90,33 @@ export default {
 
       if (touched.email) {
         if (!fields.email) errors.email = requiredFieldError
-        else if (!emailRegExp.test(fields.email)) errors.email = this.trans('validation.email')
+        else if (!emailRegExp.test(fields.email))
+          errors.email = this.trans('validation.email')
         else errors.email = ''
       }
 
       if (touched.password) {
         if (!fields.password) errors.password = requiredFieldError
-        else if (!passwordRegExp.test(fields.password)) errors.password = this.trans('validation.password', { minSymbols: 8, minSmallLetters: 1, minBigLetters: 1, minNumbers: 1 })
+        else if (!passwordRegExp.test(fields.password))
+          errors.password = this.trans('validation.password', {
+            minSymbols: 8,
+            minSmallLetters: 1,
+            minBigLetters: 1,
+            minNumbers: 1,
+          })
         else errors.password = ''
       }
 
       if (touched.confirmPassword) {
-        if (!fields.confirmPassword) errors.confirmPassword = requiredFieldError
-        else if (fields.confirmPassword !== fields.password) errors.confirmPassword = this.trans('validation.confirm-password')
+        if (!fields.confirmPassword)
+          errors.confirmPassword = requiredFieldError
+        else if (fields.confirmPassword !== fields.password)
+          errors.confirmPassword = this.trans('validation.confirm-password')
         else errors.confirmPassword = ''
       }
     },
     setField(e, fieldName) {
-      this.fields[fieldName] = e.target.value.trim()
+      this.fields[fieldName] = e.target.value
     },
   },
 }

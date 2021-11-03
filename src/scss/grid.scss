@@ -1,0 +1,84 @@
+@use 'sass:map';
+@import '@scss/utils';
+
+$grid-enable: map-get($map: $grid, $key: enable);
+$grid-columns: map-get($map: $grid, $key: columns);
+
+@mixin getColumns($prefix: false) {
+  @for $index from 1 to $grid-columns + 1 {
+    $col-size: 100% / $grid-columns * $index;
+    $col-prefix: $index;
+
+    @if($prefix) {
+      $col-prefix: #{$prefix}-#{$index};
+    }
+
+    &.cols-#{$col-prefix} {
+      --col-size: #{$col-size};
+    }
+
+    .col-#{$prefix}-auto {
+      --col-size: auto;
+      flex: 1 0 0%;
+    }
+
+    .col-#{$col-prefix} {
+      --col-size: #{$col-size};
+    }
+  } 
+}
+
+@if($grid-enable) {
+  .grid {
+    --grid-gap: #{spacing(2)};
+    --grid-gap-x: var(--grid-gap);
+    --grid-gap-y: var(--grid-gap);
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(var(--grid-gap-x) * -.5);
+    margin-right: calc(var(--grid-gap-x) * -.5);
+    margin-top: calc(var(--grid-gap-y) * -.5);
+    margin-bottom: calc(var(--grid-gap-y) * -.5);
+
+    @include fromBreakpoint('md') {
+      --grid-gap: #{spacing(6)};
+    }
+
+    & > * {
+      width: 100%;
+      max-width: var(--col-size);
+      padding-left: calc(var(--grid-gap-x) * .5);
+      padding-right: calc(var(--grid-gap-x) * .5);
+      padding-top: calc(var(--grid-gap-y) * .5);
+      padding-bottom: calc(var(--grid-gap-y) * .5);
+      flex: 0 0 var(--col-size);
+    }
+
+    @include getColumns();
+
+    @each $breakpointName, $breakpointValue in $breakpoints {
+      @media (min-width: $breakpointValue) {
+        @include getColumns($breakpointName);
+      }
+    }
+  }
+
+  .list {
+    display: flex;
+    align-items: flex-start;
+
+    & > *:not(:last-child) {
+      margin-right: spacing(1);
+    }
+
+    &.y {
+      flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: spacing(1);
+      }
+    }
+
+  }
+}

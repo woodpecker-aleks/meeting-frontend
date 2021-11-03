@@ -1,0 +1,40 @@
+@import '@scss/utils';
+
+@mixin getMargins($prefix: false) {
+  @each $marginName, $marginValue in $margins {
+    $margin-prefix: $marginName;
+
+    @if($prefix) {
+      $margin-prefix: #{$prefix}-#{$marginName};
+    }
+
+    .mt-#{$margin-prefix} {
+      margin-top: $marginValue;
+    }
+    .mb-#{$margin-prefix} {
+      margin-bottom: $marginValue;
+    }
+    .ml-#{$margin-prefix} {
+      margin-left: $marginValue;
+    }
+    .mr-#{$margin-prefix} {
+      margin-right: $marginValue;
+    }
+    .mx-#{$margin-prefix} {
+      margin-left: $marginValue;
+      margin-right: $marginValue;
+    }
+    .my-#{$margin-prefix} {
+      margin-top: $marginValue;
+      margin-bottom: $marginValue;
+    }
+  }
+}
+
+@include getMargins();
+
+@each $breakpointName, $breakpointValue in $breakpoints {
+  @media (min-width: $breakpointValue) {
+    @include getMargins($breakpointName);
+  }
+}

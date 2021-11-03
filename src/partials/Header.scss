@@ -1,0 +1,27 @@
+@import '@scss/utils';
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: useColor('main');
+	color: useColor('contrast');
+	height: 51px;
+	z-index: deep('high');
+	transition: box-shadow 200ms ease-in-out;
+	border-bottom: 1px solid useColor('main-darken');
+
+  &__container {
+    height: 100%;
+  }
+
+  &__grid {
+    --grid-gap-y: 0;
+    height: 100%;
+  }
+
+  &_elevate {
+    box-shadow: useShadow('primary');
+  }
+}

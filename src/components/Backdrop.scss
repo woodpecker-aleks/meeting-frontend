@@ -1,0 +1,72 @@
+@import "@scss/utils";
+
+.backdrop {
+  --backdrop-opacity: 0;
+	@include absolute;
+  z-index: 10;
+  pointer-events: visible;
+  border-radius: inherit;
+  transition: all 260ms useTiming("bounce"), opacity 200ms ease-in-out;
+
+  &__base, &__effect-wrapper {
+	  @include absolute;
+    transition: opacity 200ms ease-in-out;
+    background-color: currentColor;
+    border-radius: inherit;
+    opacity: var(--backdrop-opacity);
+  }
+
+  &__effect-wrapper {
+    background-color: transparent;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  &__effect {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, currentColor 0%, rgba(255, 255, 255, 0) 70%);
+    transition-property: left, top;
+    transition-duration: 50ms;
+  }
+
+  @at-root .backdrop__control:not([disabled]):hover &,
+    .backdrop__control:not([disabled]).hover &,
+    .backdrop__control:not([disabled]):focus &,
+    .backdrop__control:not([disabled]).focus & {
+    --backdrop-opacity: 0.2;
+  }
+
+  @at-root .backdrop__control:not([disabled]):focus .backdrop__base,
+    .backdrop__control:not([disabled]).focus .backdrop__base {
+    animation: pulse 500ms ease-in-out infinite;
+  }
+
+  @at-root .backdrop__control:not([disabled]):active &,
+    .backdrop__control:not([disabled]).active & {
+    --backdrop-opacity: 0.3;
+  } 
+
+  @at-root .backdrop__control:not([disabled]):active .backdrop__base,
+    .backdrop__control:not([disabled]).active .backdrop__base {
+    animation: none;
+  }
+
+  @at-root .backdrop__control:disabled {
+    --backdrop-opacity: 0 !important;
+    pointer-events: none;
+    cursor: not-allowed;  
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    box-shadow: 0 0 0 1px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+}

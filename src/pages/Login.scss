@@ -11,10 +11,7 @@
     max-width: 400px;
     display: flex;
     flex-direction: column;
-
-    & > *:not(:last-child) {
-      margin-bottom: spacing(2);
-    }
+    @include list('y', spacing(2));
   }
 
   &__submit {

@@ -1,123 +1,126 @@
-@import '@scss/utils';
+@import "@scss/utils";
 
-$input-height: 40px;
+$input-height: 36px;
 
 .input {
-  position: relative;
-  border-radius: radius(1);
-  padding: 0 spacing(2);
-  min-height: $input-height;
-  color: color('text');
+	$input: &;
 
-  &__backdrop {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  --details-opacity: 1;
+  @extend %interactive;
+  color: useColor('contrast');
+  border: none;
+  font-size: inherit;
+  background-color: transparent;
+  width: 100%;
+  display: block;
+	cursor: text;
+	position: relative;
+	border-radius: radius(1);
+	padding: 0 spacing(2);
+	min-height: $input-height;
+	margin-left: spacing(-2);
+	margin-right: spacing(-2);
+
+  &_empty {
+    --details-opacity: 0.7;
   }
 
-  &__backdrop {
-    background-color: currentColor;
-    border-radius: inherit;
-    opacity: 0;
-    pointer-events: none;
-    transition: left 200ms timing('bounce'), right 200ms timing('bounce'), opacity 200ms ease-in-out;
-    height: $input-height;
+  &:hover:not(.disabled) {
+    --details-opacity: 0;
   }
 
-  &__control {
-    background-color: transparent;
-    border: 0;
-    width: 100%;
-    font-size: inherit;
-    padding: 0 spacing(2);
-    outline: none;
-    color: currentColor;
-    font-weight: weight('bold');
-    letter-spacing: inherit;
-    height: $input-height;
-  }
+	&.focus {
+    --details-opacity: 0;
+	}
 
-  &__divider {
-    position: absolute;
-    left: spacing(2);
-    right: spacing(2);
-    bottom: spacing(0.5);
-    transition-property: opacity, background-color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-in-out;
-  }
+  &.disabled {
+    cursor: not-allowed;
 
-  &:active &__backdrop {
-    left: spacing(1);
-    right: spacing(1);
-  }
-
-  &:hover &__backdrop {
-    opacity: $backdrop-opacity;
-  }
-
-  &:hover &__divider {
-    opacity: 0;
-  }
-
-  &__control::placeholder {
-    color: currentColor;
-    opacity: 0.7;
-  }
-
-  &__icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    z-index: 1;
-  }
-
-  &__error {
-    text-align: left;
-    color: color('danger');
-    font-size: 13px;
-    line-height: 18px;
-  }
-
-  &__required {
-    position: absolute;
-    bottom: $input-height / 3;
-    left: 0;
-    font-size: 20px;
-  }
-
-  &__wrapper {
-    position: relative;
-  }
-
-  &.password &__control {
-    letter-spacing: 2px;
-    
-    &::placeholder {
-      letter-spacing: 0.1px;
+    #{$input}__control {
+      cursor: not-allowed;    
     }
   }
 
-  &.capitalize &__control {
-    text-transform: capitalize;
+  &_with-icon &__wrapper {
+    padding-right: spacing(4);
   }
 
-  &.error &__divider {
-    color: color('danger');
-  }
+	&__backdrop {
+		top: auto;
+		height: $input-height;
+	}
 
-  &.error &__required {
-    color: color('danger'); 
-  }
+	&__control {
+		background-color: transparent;
+		border: 0;
+		width: 100%;
+		font-size: inherit;
+		outline: none;
+    padding: 0;
+		color: currentColor;
+		letter-spacing: inherit;
+		height: $input-height;
 
-  &:not(.error):not(.empty) &__divider {
-    color: color('primary'); 
-  }
-}
+    &:-webkit-autofill {
+      font-size: inherit;
+    }
 
-.dark-theme .input {
-  color: color('secondary');
+    &::placeholder {
+      user-select: none;
+    }
+	}
+
+	&__divider {
+    opacity: var(--details-opacity);
+		position: absolute;
+		left: spacing(2);
+		right: spacing(2);
+		bottom: spacing(0.5);
+		transition-property: opacity, background-color;
+		transition-duration: 200ms;
+		transition-timing-function: ease-in-out;
+	}
+
+	&:active &__backdrop, &.active &__backdrop {
+		left: spacing(1);
+		right: spacing(1);
+	}
+
+	&__control::placeholder {
+		color: currentColor;
+		opacity: 0.7;
+	}
+
+	&__icon {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto 0;
+		z-index: 20;
+	}
+
+	&__required {
+    user-select: none;
+    opacity: var(--details-opacity);
+		position: absolute;
+		bottom: $input-height / 3;
+		left: spacing(-1.5);
+		font-size: 20px;
+		transition-property: opacity, background-color;
+		transition-duration: 200ms;
+		transition-timing-function: ease-in-out;
+	}
+
+	&__wrapper {
+		position: relative;
+	}
+
+	&.capitalize &__control {
+		text-transform: capitalize;
+	}
+
+  &.error {
+    @include color('danger', true);
+  }
 }

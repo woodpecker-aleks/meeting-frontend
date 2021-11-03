@@ -1,0 +1,29 @@
+@import '@scss/utils';
+
+.alert {
+	--text_font-scale: 0.8;
+
+	position: relative;
+	font-size: 0.8rem;
+	padding: spacing(1.5);
+	box-shadow: shadow('hard');
+	border-radius: radius(1);
+	backdrop-filter: effect('blur');
+
+	&__title {
+		display: flex;
+		align-items: center;
+	}
+
+	&__divider {
+		margin: spacing(1) 0 spacing(1) spacing(3);
+	}
+
+	&__icon {
+		margin-right: spacing(0.5);
+	}
+
+	&__description {
+		margin-left: spacing(3);
+	}
+}

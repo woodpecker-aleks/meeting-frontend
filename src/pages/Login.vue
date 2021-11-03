@@ -35,9 +35,6 @@
 
 <script>
 import Page from '@layouts/Page.vue'
-import Input from '@components/Input.vue'
-import Button from '@components/Button.vue'
-import Link from '@components/Link.vue'
 import { mapGetters } from 'vuex'
 import { emailRegExp, passwordRegExp } from '@utils/constants'
 
@@ -45,9 +42,6 @@ export default {
   name: 'Login',
   components: {
     Page,
-    Input,
-    Button,
-    Link,
   },
   data() {
     return {

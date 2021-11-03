@@ -1,0 +1,6 @@
+@import '@scss/utils';
+
+.label {
+  @extend %interactive;
+  user-select: none;
+}
