@@ -11,7 +11,8 @@
 	border-radius: radius(1);
 	border: 0;
   color: currentColor;
-	font-size: inherit;
+	font-size: 1rem;
+  line-height: 1;
 	background-color: transparent;
 	padding: 0 spacing(2);
   max-width: 200px;
@@ -37,6 +38,7 @@
 	}
 
 	&__start-icon .icon {
+    font-size: 20px;
 		margin-left: spacing(-0.5);
 		margin-right: spacing(0.5);
 	}

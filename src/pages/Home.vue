@@ -16,15 +16,7 @@
           <div class="list y">
             <Text type="h6">Failed</Text>
             <Image
-              class="format_1-1"
-              src="https://7themes.su/php/imres/resize.php?width=1440&height=900&cropratio=8:5&image=/_ph/55/28970829.jpg"
-              alt="Some image"
-            />
-          </div>
-          <div class="list y">
-            <Text type="h6">Failed</Text>
-            <Image
-              class="format_4-3"
+              class="format_16-9"
               src="https://7themes.su/php/imres/resize.php?width=1440&height=900&cropratio=8:5&image=/_ph/55/28970829.jpg"
               alt="Some image"
             />
