@@ -2,6 +2,9 @@
   <button
     :for="id ?? name"
     :disabled="disabled"
+    @focus="handleFocus"
+    @mousedown="isActive = true"
+    @mouseup="isActive = false"
     class="input backdrop__control"
     :class="[
       error && 'error',
@@ -24,13 +27,10 @@
       <input
         :disabled="disabled"
         ref="inputControl"
-        @keydown="handleKeyDown"
-        @keyup="handleKeyUp"
-        @focus="inFocus = true"
         @blur="inFocus = false"
         :id="id ?? name"
         :value="value"
-        @input="handleInput"
+        @input="$emit('input', e)"
         class="input__control text text_p"
         :required="required"
         :name="name"
@@ -89,28 +89,16 @@ export default {
 
       this.$refs.inputControl.focus()
     },
+    handleFocus() {
+      this.inFocus = true
+
+      this.$refs.inputControl.focus()
+    },
     handleKeyDown(e) {
       if (e.code === 'Enter') this.isActive = true
     },
     handleKeyUp(e) {
       if (e.code === 'Enter') this.isActive = false
-    },
-    handleInput(e) {
-      if (this.ignoreSymbols) {
-        const fixedValue = this.ignoreSymbols.forEach((symbol) => {
-          e.target.value = e.target.value.replaceAll(symbol, '')
-        })
-
-        e = {
-          ...e,
-          target: {
-            ...e.target,
-            value: fixedValue,
-          },
-        }
-      }
-
-      this.$emit('input', e)
     },
   },
 }

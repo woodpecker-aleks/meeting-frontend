@@ -37,11 +37,19 @@ export default {
   },
   methods: {
     setContentWidth() {
-      const contentWidth = this.$refs.content.clientWidth
+      const container = this.$refs.container
+      const content = this.$refs.content
+      const contentWidth = content.clientWidth
 
-      this.$refs.container.style.setProperty('--content-width', contentWidth + 'px')
+      if (!this.$props.active && container.clientWidth < contentWidth) returna
 
-      if (this.$props.active) this.isActive = true
+      container.style.setProperty('--content-width', contentWidth + 'px')
+
+      const styles = getComputedStyle(content)
+
+      container.style.setProperty('--run-duration', contentWidth / Number(styles.fontSize.replace('px', '')) * 250 + 'ms')
+
+      this.isActive = true
     },
   },
 }

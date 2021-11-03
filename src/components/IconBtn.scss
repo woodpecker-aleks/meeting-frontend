@@ -16,6 +16,10 @@
 
 	&.sm {
 		@include size(24px);
+
+    .icon {
+      font-size: 20px;
+    }
 	}
 
   .icon {

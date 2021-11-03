@@ -5,7 +5,7 @@
         <Text type="h3">Dynamic string examples</Text>
         <Divider />
         <DynamicString active>
-          <b>Lorem</b> ipsum, dolor sit amet consectetur adipisicing elit
+          Lorem ipsum dolor sit amet consectetur adipisicing elit
         </DynamicString>
       </Section>
       <Section>
@@ -121,16 +121,10 @@
         <Text type="h3">Button examples</Text>
         <Divider />
         <div class="grid cols-6 cols-md-2">
-          <div class="list y">
+          <div class="list y clr-primary-reverse">
             <Text type="h6">Default</Text>
             <Button>
               Click
-            </Button>
-          </div>
-          <div class="list y">
-            <Text type="h6">Primary</Text>
-            <Button class="primary">
-              Primary
             </Button>
           </div>
           <div class="list y">
@@ -151,6 +145,15 @@
           <div class="list y">
             <Text type="h6">Filled</Text>
             <Button class="filled clr-primary">
+              Login
+              <template #start-icon>
+                <Icon name="lock" class="sm" />
+              </template>
+            </Button>
+          </div>
+          <div class="list y">
+            <Text type="h6">Disabled</Text>
+            <Button class="filled clr-primary" disabled>
               Login
               <template #start-icon>
                 <Icon name="lock" class="sm" />

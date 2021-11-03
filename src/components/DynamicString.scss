@@ -4,8 +4,8 @@
   --content-width: 0px;
   --content-margin: #{spacing(4)};
   --border-opacity: 0;
+  --run-duration: 5s;
 
-  max-width: 400px;
   position: relative;
   user-select: none;
 
@@ -43,9 +43,12 @@
   &__content {
     position: absolute;
     animation: run-string 5s linear infinite;
+    animation-duration: var(--run-duration);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 
     &:last-child {
-      animation: run-string-second 5s linear infinite;
+      animation-name: run-string-second;
     }
   }
 
