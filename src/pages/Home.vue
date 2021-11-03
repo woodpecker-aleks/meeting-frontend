@@ -2,6 +2,13 @@
   <Page class="home">
     <Container class="home__container md">
       <Section>
+        <Text type="h3">Dynamic string examples</Text>
+        <Divider />
+        <DynamicString>
+          <b>Lorem</b> ipsum, dolor sit amet consectetur adipisicing elit
+        </DynamicString>
+      </Section>
+      <Section>
         <Text type="h3">Image examples</Text>
         <Divider />
         <div class="grid cols-12 cols-md-4">

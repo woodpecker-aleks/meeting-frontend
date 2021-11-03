@@ -6,7 +6,7 @@
   z-index: 10;
   pointer-events: visible;
   border-radius: inherit;
-  transition: all 260ms useTiming("bounce"), opacity 200ms ease-in-out;
+  transition: all 260ms useTiming("bounce"), opacity useTransition('background-color');
 
   &__base, &__effect-wrapper {
 	  @include absolute;
@@ -25,7 +25,7 @@
   &__effect {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, currentColor 0%, rgba(255, 255, 255, 0) 70%);
+    background: radial-gradient(circle, #{useColor('contrast')} 0%, #{useColor('contrast', 0)} 70%);
     transition-property: left, top;
     transition-duration: 50ms;
   }

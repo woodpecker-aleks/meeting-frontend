@@ -41,7 +41,7 @@
 }
 
 @function useTransition($name) {
-  @return #{$name + ' ' + map-get($map: $property-transitions, $key: $mame)};
+  @return map-get($map: $property-transitions, $key: $name);
 }
 
 @function if($condition, $true, $false) {

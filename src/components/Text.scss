@@ -5,10 +5,10 @@
 
   color: currentColor;
 	position: relative;
+  line-height: 150%;
 
 	&_p {
 		font-size: calc(var(--text_font-scale) * 1rem);
-		line-height: 150%;
 	}
 
 	&_sub {

@@ -1,0 +1,64 @@
+@import '@scss/utils';
+
+.dynamic-string {
+  --content-width: #{442px + spacing(4)};
+  max-width: 400px;
+  position: relative;
+
+  &::before, &::after {
+    content: '';
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: spacing(5);
+  }
+
+  &::before {
+    left: 0px;
+    background: linear-gradient(270deg, #{useColor('background', 0)} 0%, #{useColor('background')} 90%);
+  }
+
+  &::after {
+    right: 0px;
+    background: linear-gradient(90deg, #{useColor('background', 0)} 0%, #{useColor('background')} 90%);  
+  }
+
+  &__string {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;  
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: calc(1rem * 1.5);
+  }
+
+
+  &__content {
+    position: absolute;
+    animation: run-string 5s linear infinite;
+
+    &:last-child {
+      animation: run-string-second 5s linear infinite;
+    }
+  }
+}
+
+@keyframes run-string {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(var(--content-width));
+  }
+}
+
+@keyframes run-string-second {
+  0% {
+    transform: translateX(calc(var(--content-width) * -1));
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
