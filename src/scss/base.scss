@@ -14,6 +14,10 @@
 	}
 }
 
+html, body {
+  height: 100%;
+}
+
 .app {
   @include color('secondary');
   background-color: useColor('main');
@@ -32,7 +36,7 @@
 //* disable highlight for interative elements
 a,
 button,
-li,
+label,
 input,
 [tabindex] {
 	@include disableTapHighlight;
