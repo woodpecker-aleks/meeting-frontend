@@ -242,7 +242,6 @@
         </TextEditor>
       </Section>
     </Container>
-    <MenuIcon />
   </Page>
 </template>
 
@@ -250,14 +249,12 @@
 import Page from '@layouts/Page.vue'
 import { mapGetters } from 'vuex'
 import Label from '@/components/Label.vue'
-import MenuIcon from '../assets/icons/menu.svg'
 
 export default {
   name: 'Home',
   components: {
     Page,
     Label,
-    MenuIcon,
   },
   data() {
     return {
