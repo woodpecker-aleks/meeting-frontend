@@ -1,9 +1,13 @@
 @import '@scss/utils';
 
 .dynamic-string {
-  --content-width: #{442px + spacing(4)};
+  --content-width: 0px;
+  --content-margin: #{spacing(4)};
+  --border-opacity: 0;
+
   max-width: 400px;
   position: relative;
+  user-select: none;
 
   &::before, &::after {
     content: '';
@@ -12,28 +16,29 @@
     top: 0;
     bottom: 0;
     width: spacing(5);
+    transition: opacity useTransition('opacity');
   }
 
   &::before {
-    left: 0px;
+    left: -1px;
+    opacity: var(--border-opacity);
     background: linear-gradient(270deg, #{useColor('background', 0)} 0%, #{useColor('background')} 90%);
   }
 
   &::after {
-    right: 0px;
+    right: -1px;
     background: linear-gradient(90deg, #{useColor('background', 0)} 0%, #{useColor('background')} 90%);  
   }
 
   &__string {
     position: relative;
     overflow: hidden;
-    white-space: nowrap;  
+    white-space: nowrap;
     display: flex;
     align-items: center;
     width: 100%;
     min-height: calc(1rem * 1.5);
   }
-
 
   &__content {
     position: absolute;
@@ -43,22 +48,30 @@
       animation: run-string-second 5s linear infinite;
     }
   }
+
+  &_active {
+    --border-opacity: 1;
+  }
+
+  &:not(&_active) &__content {
+    animation: none !important;
+  }
 }
 
 @keyframes run-string {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(var(--content-width));
+    transform: translateX(calc((var(--content-width) + var(--content-margin)) * -1));
   }
 }
 
 @keyframes run-string-second {
   0% {
-    transform: translateX(calc(var(--content-width) * -1));
+    transform: translateX(calc(var(--content-width) + var(--content-margin)));
   }
   100% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 }

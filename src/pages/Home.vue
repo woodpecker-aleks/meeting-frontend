@@ -4,7 +4,7 @@
       <Section>
         <Text type="h3">Dynamic string examples</Text>
         <Divider />
-        <DynamicString>
+        <DynamicString active>
           <b>Lorem</b> ipsum, dolor sit amet consectetur adipisicing elit
         </DynamicString>
       </Section>
@@ -257,6 +257,7 @@ export default {
   },
   data() {
     return {
+      activeString: false,
       gender: 'male',
       switchVal: false,
       defaultInput: '',
