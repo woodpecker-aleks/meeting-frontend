@@ -6,6 +6,7 @@
   z-index: 10;
   pointer-events: visible;
   border-radius: inherit;
+  cursor: pointer;
   transition: all 260ms useTiming("bounce"), opacity useTransition('background-color');
 
   &__base, &__effect-wrapper {

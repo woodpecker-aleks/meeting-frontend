@@ -237,11 +237,16 @@
         </div>
       </Section>
       <Section>
-        <Text type="h3">Text editor examples</Text>
+        <Text type="h3">Slider examples</Text>
         <Divider />
-        <TextEditor>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias a magni dolores quam placeat quos officiis nemo repellat ut repudiandae sint facilis consequuntur, nostrum atque vero cum nihil sapiente ex.
-        </TextEditor>
+          <Slider @change="rangeValue = $event.target.value" :value="rangeValue" class="clr-primary" />
+          <Slider @change="rangeValue = $event.target.value" showSteps :step="20" :value="rangeValue" class="clr-primary" />
+      </Section>
+      <Section>
+        <Text type="h3">Loader examples</Text>
+        <Divider />
+        <CircleLoader class="clr-primary-reverse" />
+        <LinearLoader class="clr-primary-reverse" />
       </Section>
     </Container>
   </Page>
@@ -260,6 +265,7 @@ export default {
   },
   data() {
     return {
+      rangeValue: 20,
       activeString: false,
       gender: 'male',
       switchVal: false,

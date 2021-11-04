@@ -1,0 +1,22 @@
+@import "@scss/utils";
+
+.linear-loader {
+  overflow: hidden;
+  max-width: 400px;
+  color: useColor('contrast');
+
+  &__effect {
+    height: 0;
+    border-top: useBorder('primary');
+    animation: run-loader 1s ease-in-out infinite;
+  }
+}
+
+@keyframes run-loader {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);  
+  }
+}
