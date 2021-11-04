@@ -79,6 +79,8 @@ export default {
       this.handleMove(e)
       this.isActive = true
 
+      document.body.style.overflowY = 'hidden'
+
       window.addEventListener(deviceType() === 'mobile' ? 'touchmove' : 'mousemove', this.handleMove)
       window.addEventListener(deviceType() === 'mobile' ? 'touchend' : 'mouseup', this.handleStop)
     },
@@ -105,6 +107,8 @@ export default {
     },
     handleStop() {
       this.isActive = false
+
+      document.body.style.overflowY = 'auto'
 
       window.removeEventListener(deviceType() === 'mobile' ? 'touchmove' : 'mousemove', this.handleMove)
       window.removeEventListener(deviceType() === 'mobile' ? 'touchend' : 'mouseup', this.handleStop)
