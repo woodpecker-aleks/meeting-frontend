@@ -1,6 +1,26 @@
 <template>
-  <div @mouseenter="isHover = true" @mouseleave="isHover = false" @keydown="handleKeyDown" @keyup="isActive = false" tabindex="0" ref="slider" @mousedown="handleDrag" :class="['slider backdrop__control', isActive && 'slider_active', isHover && 'hover']">
-    <input type="range" :max="max" :min="min" :value="value" hidden />
+  <div
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
+    @keydown="handleKeyDown"
+    @keyup="isActive = false"
+    tabindex="0"
+    ref="slider"
+    @mousedown="handleDrag"
+    @touchstart="handleDrag"
+    :class="[
+      'slider backdrop__control',
+      isActive && 'slider_active',
+      isHover && 'hover'
+    ]"
+  >
+    <input
+      type="range"
+      :max="max"
+      :min="min"
+      :value="value"
+      hidden
+    />
     <div class="slider__track">
       <div class="slider__progress" :style="{ width: value + '%' }" />
       <ul class="slider__breakpoints" v-if="showSteps">

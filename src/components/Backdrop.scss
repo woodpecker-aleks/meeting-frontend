@@ -31,6 +31,10 @@
     transition-duration: 50ms;
   }
 
+  @at-root .backdrop__control[disabled] {
+    cursor: not-allowed;
+  }
+
   @at-root .backdrop__control:not([disabled]):hover &,
     .backdrop__control:not([disabled]).hover &,
     .backdrop__control:not([disabled]):focus &,
