@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
     @keydown="handleKeyDown"
@@ -8,6 +8,7 @@
     ref="slider"
     @mousedown="handleDrag"
     @touchstart="handleDrag"
+    :disabled="disabled"
     :class="[
       'slider backdrop__control',
       isActive && 'slider_active',
@@ -15,11 +16,12 @@
     ]"
   >
     <input
+      class="slider__control"
       type="range"
       :max="max"
       :min="min"
       :value="value"
-      hidden
+      :disabled="disabled"
     />
     <div class="slider__track">
       <div class="slider__progress" :style="{ width: value + '%' }" />
@@ -27,10 +29,10 @@
         <li :style="{ left: `calc(${point}% - 0.5px)` }" v-for="point of breakpoints" :key="point" class="slider__breakpoint" />
       </ul>
     </div>
-    <button class="slider__btn" :style="{ left: `calc(${value}% - 5px)` }">
+    <button :disabled="disabled" class="slider__btn" :style="{ left: `calc(${value}% - 5px)` }">
       <Backdrop class="slider__backdrop" />
     </button>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -41,6 +43,7 @@ export default {
   props: {
     value: Number,
     step: Number,
+    disabled: Boolean,
     min: {
       type: Number,
       default: 0,

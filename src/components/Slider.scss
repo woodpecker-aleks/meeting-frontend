@@ -1,17 +1,24 @@
 @import '@scss/utils';
 
 .slider {
+  @extend %interactive;
 	position: relative;
 	height: 20px;
 	cursor: pointer;
-	max-width: 200px;
+  border: none;
+  width: 100%;
+  background-color: transparent;
 
-	&:active &__track,
+  &[disabled] {
+    --main-color: var(--contrast-color);
+  }
+
+	&:not([disabled]):active &__track,
 	&_active &__track {
 		height: 10px;
 	}
 
-	&:active &__btn,
+	&:not([disabled]):active &__btn,
 	&_active &__btn {
 		opacity: 0;
 	}
@@ -28,7 +35,7 @@
 		width: 100%;
 		overflow: hidden;
 		transition: height 140ms ease-in-out;
-    background-color: useColor('main', 0.7);
+    background-color: useColor('main', 0.3);
 	}
 
 	&__progress {
@@ -37,6 +44,10 @@
 		height: 100%;
     background-color: useColor('main');
 	}
+
+  &__control {
+    display: none;
+  }
 
 	&__backdrop {
     color: useColor('main');

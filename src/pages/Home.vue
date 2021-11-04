@@ -239,8 +239,17 @@
       <Section>
         <Text type="h3">Slider examples</Text>
         <Divider />
-          <Slider @change="rangeValue = $event.target.value" :value="rangeValue" class="clr-primary" />
-          <Slider @change="rangeValue = $event.target.value" showSteps :step="20" :value="rangeValue" class="clr-primary" />
+          <div class="grid cols-6">
+            <div>
+              <Slider @change="rangeValue = $event.target.value" :value="rangeValue" class="clr-primary" />
+            </div>
+            <div>
+              <Slider @change="rangeValue = $event.target.value" showSteps :step="20" :value="rangeValue" class="clr-primary" />
+            </div>
+            <div>
+              <Slider disabled @change="rangeValue = $event.target.value" :value="rangeValue" class="clr-primary" />
+            </div>
+          </div>
       </Section>
       <Section>
         <Text type="h3">Loader examples</Text>
